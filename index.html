@@ -18,21 +18,42 @@ html,body{margin:0;height:100%;overflow:hidden;background:#cfd8de;font-family:va
 .tb svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .tb.on{background:var(--accent);color:#1d1404;border-color:var(--accent)}
 #mini{display:none}
-.more-b{margin-top:10px;background:none;border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:8px 12px;font:700 13px var(--font);cursor:pointer}
-.go{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:12px;min-height:42px;border-radius:10px;border:1px solid var(--accent);background:rgba(240,173,46,.14);color:var(--accent);font:800 14px var(--font);cursor:pointer}
-.go svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-#walkbar{position:fixed;z-index:6;left:50%;top:70px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 8px;backdrop-filter:blur(8px)}
-#walkbar[hidden],#joy[hidden]{display:none}
-#walkHint{font-size:12px;color:var(--muted);padding:0 6px;white-space:nowrap}
-#joy{position:fixed;z-index:6;left:18px;bottom:calc(74px + env(safe-area-inset-bottom,0px));width:124px;height:124px;border-radius:50%;background:rgba(14,22,30,.38);border:2px solid rgba(255,255,255,.4);touch-action:none}
-#joy i{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(240,173,46,.9);box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.go{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:14px;min-height:44px;border-radius:10px;border:1px solid var(--accent);background:rgba(240,173,46,.14);color:var(--accent);font:800 15px var(--font);cursor:pointer}
+.go svg,#wgo svg,#lookHint svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+[hidden]{display:none!important}
+#wmode{position:fixed;z-index:6;left:50%;top:70px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:5px;backdrop-filter:blur(8px)}
+.seg{display:flex;background:rgba(255,255,255,.05);border-radius:9px;padding:2px}
+.seg button{border:0;background:none;color:var(--muted);font:700 13.5px var(--font);padding:8px 12px;border-radius:7px;cursor:pointer;white-space:nowrap}
+.seg button.on{background:var(--accent);color:#1d1404}
+.hb{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:none;color:var(--ink);font:800 16px var(--font);cursor:pointer}
+#wgo{position:fixed;z-index:6;left:50%;top:124px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--accent);border-radius:999px;padding:5px 5px 5px 14px;font:700 14px var(--font);white-space:nowrap;backdrop-filter:blur(8px)}
+#wgo svg{color:var(--accent)}
+#wgo button{border:0;background:rgba(255,255,255,.12);color:var(--ink);border-radius:999px;padding:8px 13px;font:700 13px var(--font);cursor:pointer}
+#near{position:fixed;z-index:6;left:50%;bottom:66px;transform:translateX(-50%);border:1px solid var(--accent);background:var(--panel);color:var(--ink);border-radius:999px;padding:11px 18px;font:700 15px var(--font);cursor:pointer;backdrop-filter:blur(8px);white-space:nowrap}
+#near b{color:var(--accent);font-family:var(--mono);margin-right:8px}
+#keys{position:fixed;z-index:5;left:50%;bottom:16px;transform:translateX(-50%);display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:7px 12px;white-space:nowrap}
+#keys kbd{font:700 12px var(--mono);color:var(--ink);background:rgba(255,255,255,.1);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:2px 7px}
+#keys span{margin-right:8px}
+#joy{position:fixed;z-index:6;left:18px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:124px;height:124px;border-radius:50%;background:rgba(14,22,30,.38);border:2px solid rgba(255,255,255,.45);touch-action:none}
+#joy i{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(240,173,46,.92);box-shadow:0 2px 8px rgba(0,0,0,.35);pointer-events:none}
+#joy span{position:absolute;left:0;right:0;bottom:-22px;text-align:center;font:800 12px var(--font);color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.9);letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
+#lookHint{position:fixed;z-index:5;right:18px;bottom:calc(150px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;font:700 13.5px/1.3 var(--font);color:#fff;text-align:right;pointer-events:none;background:rgba(14,22,30,.72);border-radius:12px;padding:8px 10px}
+#lookHint svg{width:26px;height:26px}
+#guide{position:fixed;inset:0;z-index:25;background:rgba(5,9,13,.62);display:grid;place-items:center;padding:16px}
+.gcard{background:#121b24;border:1px solid var(--line);border-radius:16px;padding:20px 18px 16px;max-width:390px;width:100%}
+.gcard h4{margin:0 0 14px;font-size:19px}
+.gi{display:flex;gap:12px;align-items:flex-start;margin:0 0 14px;font-size:15px;line-height:1.45;color:#d5dde5}
+.gi i{flex:none;width:38px;height:38px;border-radius:10px;background:rgba(240,173,46,.15);color:var(--accent);display:grid;place-items:center;font:800 13px var(--font);font-style:normal}
+.gi b{display:block;color:#fff}
+.gcard button{width:100%;min-height:46px;border-radius:10px;border:0;background:var(--accent);color:#1d1404;font:800 15px var(--font);cursor:pointer;margin-top:2px}
+#bNote{position:fixed;z-index:4;right:12px;bottom:12px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:italic 800 15px Georgia,serif;cursor:pointer}
 .panel{position:fixed;z-index:6;background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(8px)}
-#side{left:12px;top:72px;bottom:12px;width:340px;border-radius:14px;display:flex;flex-direction:column;overflow:hidden}
+#side{left:12px;top:72px;max-height:calc(100% - 84px);width:310px;border-radius:14px;display:flex;flex-direction:column;overflow:hidden}
 #grab{display:none}
 .tabs{display:flex;border-bottom:1px solid var(--line)}
 .tab{flex:1;background:none;border:0;color:var(--muted);font:800 12px var(--font);letter-spacing:.08em;text-transform:uppercase;padding:12px 4px;border-bottom:3px solid transparent;cursor:pointer}
 .tab.active{color:var(--ink);border-bottom-color:var(--accent)}
-.pane{display:none;overflow:auto;padding:12px 14px;flex:1;-webkit-overflow-scrolling:touch}
+.pane{display:none;overflow:auto;padding:12px 14px;flex:0 1 auto;-webkit-overflow-scrolling:touch}
 .pane.active{display:block}
 .step-n{font:800 12px var(--font);color:var(--accent);letter-spacing:.1em;text-transform:uppercase}
 .step-t{font-size:18px;font-weight:800;margin:4px 0 8px}
@@ -53,15 +74,26 @@ html,body{margin:0;height:100%;overflow:hidden;background:#cfd8de;font-family:va
 .st{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;cursor:pointer}
 .st i{width:26px;height:6px;border-radius:3px;flex:none}
 .st.off{opacity:.35}
-#info{right:12px;top:72px;width:370px;max-height:calc(100% - 84px);border-radius:14px;overflow:auto;padding:14px 16px;display:none}
+#info{right:12px;top:72px;width:350px;max-height:calc(100% - 84px);border-radius:14px;overflow:auto;padding:0;display:none}
 #info.show{display:block}
-#info h2{margin:0;font-size:13px;font-family:var(--mono);color:var(--accent)}
-#info h3{margin:2px 0 10px;font-size:19px;padding-right:24px}
-#info dl{margin:0;display:grid;grid-template-columns:112px 1fr;gap:6px 10px;font-size:13.5px;line-height:1.45}
-#info dl[hidden]{display:none}
-#info dt{color:var(--muted)}
+#info .grip{display:none}
+#info .ih{padding:14px 16px 0}
+#info .tg{font:700 12.5px var(--mono);color:var(--accent);padding-right:34px}
+#info h3{margin:3px 0 8px;font-size:20px;line-height:1.25;padding-right:24px}
+.ctabs{display:flex;gap:2px;border-bottom:1px solid var(--line);padding:0 10px;position:sticky;top:0;background:#0e161e;z-index:1}
+.ctabs button{background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);font:700 14px var(--font);padding:10px 8px;cursor:pointer}
+.ctabs button.on{color:var(--ink);border-bottom-color:var(--accent)}
+.cbody{padding:14px 16px 16px}
+.fn{margin:0 0 14px;font-size:16px;line-height:1.55;color:#eef2f5}
+.kvs{display:flex;flex-wrap:wrap;gap:8px}
+.kv{display:flex;flex-direction:column;gap:2px;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:10px;padding:7px 11px;font-size:14.5px;font-weight:700;max-width:100%}
+.kv small{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.badge{display:inline-block;font:800 10.5px var(--font);letter-spacing:.06em;color:#2a1405;background:#ffb38a;border-radius:5px;padding:1px 6px;margin-left:6px;vertical-align:1px}
+#info dl{margin:0;display:grid;grid-template-columns:112px 1fr;gap:10px 12px;font-size:14.5px;line-height:1.5}
+#info dt{color:var(--muted);font-size:13px;padding-top:1px}
 #info dd{margin:0}
-#info .x{position:absolute;right:10px;top:8px;background:none;border:0;color:var(--muted);font-size:24px;cursor:pointer;line-height:1}
+#info .x{position:absolute;right:6px;top:6px;width:42px;height:42px;background:none;border:0;color:var(--muted);font-size:26px;cursor:pointer;line-height:1;z-index:2}
+.more{display:inline;background:none;border:0;padding:0;color:var(--accent);font:700 14px var(--font);cursor:pointer}
 .est{color:#ffb38a}
 .pl-h{font:800 11px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
 .thumbs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -78,12 +110,13 @@ html,body{margin:0;height:100%;overflow:hidden;background:#cfd8de;font-family:va
 #viewer.zoom .vb{display:block}
 #viewer.zoom img{max-width:none;max-height:none;width:2200px;cursor:zoom-out}
 #viewer .vn{font-size:12px;color:var(--muted);text-align:center;padding:6px 0 calc(10px + env(safe-area-inset-bottom,0px))}
-.note{position:fixed;right:12px;bottom:12px;z-index:4;max-width:430px;font-size:11.5px;color:#22303c;background:rgba(255,255,255,.78);border-radius:8px;padding:6px 10px}
+.note{display:none;position:fixed;right:12px;bottom:52px;z-index:4;max-width:430px;font-size:11.5px;color:#22303c;background:rgba(255,255,255,.78);border-radius:8px;padding:6px 10px}
 #loading{position:fixed;inset:0;display:grid;place-items:center;background:#0f1820;color:#cfd8de;z-index:20;font-weight:700;transition:opacity .5s}
 #loading.done{opacity:0;pointer-events:none}
 #loading div{display:flex;flex-direction:column;align-items:center;gap:14px}
 #loading i{width:34px;height:34px;border-radius:50%;border:3px solid #2b3a48;border-top-color:var(--accent);animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
+body.noteon .note{display:block}
 @media (max-width:820px){
   /* celular: una sola fila de íconos y el 3D casi a pantalla completa */
   .top{padding:calc(6px + env(safe-area-inset-top,0px)) 10px 6px;gap:6px}
@@ -106,11 +139,15 @@ html,body{margin:0;height:100%;overflow:hidden;background:#cfd8de;font-family:va
   #mOpen i{font-style:normal;color:var(--muted);font-size:12px;flex:none}
   #grab{display:block;width:100%;height:18px;border:0;background:none;cursor:pointer;position:relative;flex:none}
   #grab::after{content:"";position:absolute;left:50%;top:7px;width:42px;height:5px;margin-left:-21px;border-radius:3px;background:#4a5b6b}
-  #info{left:8px;right:8px;width:auto;top:calc(60px + env(safe-area-inset-top,0px));max-height:min(46%,calc(100% - 140px));padding:12px 14px}
-  #info h3{font-size:17px;margin-bottom:8px}
-  #info dl{grid-template-columns:104px 1fr;font-size:13px}
-  #walkbar{left:auto;right:14px;top:auto;transform:none;bottom:calc(74px + env(safe-area-inset-bottom,0px));flex-direction:column;padding:6px}
-  #walkHint{display:none}
+  #info{left:0;right:0;top:auto;bottom:0;width:auto;max-height:58%;border-radius:18px 18px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}
+  #info .grip{display:block;width:42px;height:5px;border-radius:3px;background:#4a5b6b;margin:8px auto -4px}
+  #info dl{grid-template-columns:100px 1fr}
+  body.card #side{display:none}
+  #wmode{top:calc(58px + env(safe-area-inset-top,0px));padding:4px}
+  .seg button{padding:8px 10px;font-size:13px}
+  #wgo{top:calc(110px + env(safe-area-inset-top,0px));font-size:13px}
+  #near{bottom:calc(236px + env(safe-area-inset-bottom,0px))}
+  #keys,#bNote{display:none}
   .note{display:none}
 }
 </style>
@@ -144,10 +181,14 @@ html,body{margin:0;height:100%;overflow:hidden;background:#cfd8de;font-family:va
 <div id="viewer" hidden><div class="vh"><div class="vt"></div><button class="vx" type="button">Cerrar</button></div>
   <div class="vb"><img alt="Plano del equipo"></div><div class="vn">Toque el plano para ampliarlo</div></div>
 <div class="note" id="note"></div>
-<div id="walkbar" hidden><button class="tb" id="bView" type="button" title="Cambiar entre 1ª y 3ª persona" aria-label="Cambiar entre 1ª y 3ª persona"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>1ª persona</span></button>
-  <button class="tb" id="bFree" type="button" title="Volver a la vista libre" aria-label="Volver a la vista libre"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Vista libre</span></button>
-  <span id="walkHint">WASD o flechas: caminar · Shift: trotar · arrastre: mirar</span></div>
-<div id="joy" hidden><i></i></div>
+<button id="bNote" type="button" aria-label="Nota sobre las medidas">i</button>
+<div id="wmode" hidden><div class="seg" role="group" aria-label="Modo de vista"><button type="button" data-m="0">Libre</button><button type="button" data-m="3">3ª persona</button><button type="button" data-m="1">1ª persona</button></div><button class="hb" id="bHelp" type="button" aria-label="Cómo se camina" title="Cómo se camina">?</button></div>
+<div id="wgo" hidden><svg viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="M10 21l2-6 3 3v3M8 12l2-4 4 1 2 4 3 1M12 15l-1-5"/></svg><span></span><button id="wCancel" type="button">Cancelar</button></div>
+<button id="near" type="button" hidden></button>
+<div id="keys" hidden><kbd>W A S D</kbd><span>mover</span><kbd>Shift</kbd><span>trotar</span><kbd>Arrastrar</kbd><span>mirar</span><kbd>Clic</kbd><span>ir a un equipo o al piso</span></div>
+<div id="joy" hidden><i></i><span>Mover</span></div>
+<div id="lookHint" hidden>Arrastre aquí<br>para mirar<svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-1.5a1.5 1.5 0 0 1 3 0V11m0-1a1.5 1.5 0 0 1 3 0v4a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L4.6 15a1.5 1.5 0 0 1 2.4-1.8L9 15"/><path d="M3 5l-2 2 2 2M21 5l2 2-2 2"/></svg></div>
+<div id="guide" hidden><div class="gcard"><h4>Cómo caminar por la planta</h4><div id="gList"></div><button type="button" id="gOk">Entendido</button></div></div>
 <script>console.warn('Scripts "build/three.js" and "build/three.min.js" are deprecated with r150+, and will be removed with r160. Please use ES Modules or alternatives: https://threejs.org/docs/index.html#manual/en/introduction/Installation'),
 /**
  * @license
@@ -2132,7 +2173,7 @@ const groups={}, pickables=[], eqBoxes=[];
 P.equipment.forEach(e=>{const G=new THREE.Group(); (BUILD[e.tag]||fromParts)(G,e);
   const {group,meshes}=bake(G,{eq:e}); groups[e.tag]=group;
   if(e.tag!=="RACK") meshes.forEach(m=>pickables.push(m));
-  if(e.tag!=="RACK"){const b=new THREE.Box3().setFromObject(group); b.expandByScalar(.25); eqBoxes.push(b)}
+  if(e.tag!=="RACK"){const b=new THREE.Box3().setFromObject(group); b.expandByScalar(.25); b.eq=e; eqBoxes.push(b)}
   if(!e.focus) e.focus=new THREE.Box3().setFromObject(group).getCenter(new V3()).toArray()});
 
 // ---- tuberías de proceso: cuerpo + flechas de flujo que avanzan ----
@@ -2234,35 +2275,52 @@ function highlight(tag){
     let h=hiCache.get(o); if(!h){h=o.clone(); h.emissive=new THREE.Color("#ffb52e"); h.emissiveIntensity=.05; hiCache.set(o,h)} m.userData.orig=o; m.material=h})}
 const PL=window.PLANOS||{};
 const WALK_ICON='<svg viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="M10 21l2-6 3 3v3M8 12l2-4 4 1 2 4 3 1M12 15l-1-5"/></svg>';
-const KEY=["Función","Dimensiones","TAG mantenimiento","Capacidad"]; // lo que se ve primero en el celular
-function showInfo(e){const info=$("info");
-  const row=([k,v])=>`<dt>${k}</dt><dd${/ESTIMAD|[Aa]proximad/.test(v)?' class="est"':''}>${v}</dd>`, all=Object.entries(e.info);
-  const main=narrow()?all.filter(([k])=>KEY.includes(k)).slice(0,4):all, rest=all.filter(r=>!main.includes(r));
-  const pl=(e.planos||[]).filter(id=>PL[id]).map(id=>`<button type="button" class="thumb" data-p="${id}"><img src="${PL[id].src}" alt=""><span>${PL[id].t}</span></button>`).join("");
-  info.innerHTML=`<button class="x" aria-label="Cerrar" type="button">×</button><h2>${e.tag}</h2><h3>${e.name}</h3><dl>${main.map(row).join("")}</dl>`+
-    (rest.length?`<dl class="rest" hidden>${rest.map(row).join("")}</dl><button type="button" class="more-b">Ver más (${rest.length} datos)</button>`:"")+
-    `<button type="button" class="go">${WALK_ICON}Ir caminando hasta aquí</button>`+
-    (pl?`<div class="pl-h">Planos de este equipo</div><div class="thumbs">${pl}</div>`:"");
-  info.classList.add("show"); info.scrollTop=0; resize(); info.querySelector(".x").onclick=()=>{info.classList.remove("show"); highlight(null); resize()};
-  const mb=info.querySelector(".more-b"); if(mb) mb.onclick=()=>{const d=info.querySelector(".rest"); d.hidden=!d.hidden; d.style.marginTop="6px";
-    mb.textContent=d.hidden?`Ver más (${rest.length} datos)`:"Ver menos"};
-  info.querySelector(".go").onclick=()=>walkTo(e.tag);
-  info.querySelectorAll(".thumb").forEach(b=>b.onclick=()=>openPlano(b.dataset.p))}
+const isEst=v=>/ESTIMAD|[Aa]proximad/.test(v);
+// cifra corta para las etiquetas del resumen: lo primero antes de « · », sin paréntesis largos
+const brief=v=>{let s=String(v).replace(/<[^>]+>/g,"").split(" · ")[0].replace(/\s*[—–-]?\s*ESTIMAD[OA]S?/g,"").trim();
+  if(s.length>28) s=s.replace(/\s*\(.*$/,""); return s.length>28?s.slice(0,26).trim()+"…":s};
+const CHIPS=["Capacidad","Dimensiones","Clase","Presión","Caudal","Tipo","Equipo"];
+let cardEq=null;
+// ficha de lectura: Resumen (para qué sirve + cifras clave) · Datos · Planos
+function showInfo(e){const info=$("info"), all=Object.entries(e.info); cardEq=e;
+  const tm=e.info["TAG mantenimiento"], sub=e.tag+(tm?` · ${brief(tm)}`:"");
+  const chips=CHIPS.filter(k=>e.info[k]).slice(0,3).map(k=>`<span class="kv"><small>${k}${/ESTIMAD/.test(e.info[k])?'<span class="badge">ESTIMADO</span>':""}</small>${brief(e.info[k])}</span>`).join("");
+  const rows=all.map(([k,v])=>{const est=/ESTIMAD/.test(v); return `<dt>${k}</dt><dd${isEst(v)?' class="est"':""}>${est?v.replace(/\s*[—–-]?\s*ESTIMAD[OA]S?/g,""):v}${est?'<span class="badge">ESTIMADO</span>':""}</dd>`}).join("");
+  const pl=(e.planos||[]).filter(id=>PL[id]), here=walk&&!walk.path&&distEq(e)<1.5;
+  const tabs=[["res","Resumen"],["dat",`Datos (${all.length})`]].concat(pl.length?[["pla",`Planos (${pl.length})`]]:[]);
+  info.innerHTML=`<div class="grip"></div><button class="x" aria-label="Cerrar" type="button">×</button>
+    <div class="ih"><div class="tg">${sub}</div><h3>${e.name}</h3></div>
+    <div class="ctabs" role="tablist">${tabs.map(([k,t])=>`<button type="button" role="tab" data-k="${k}">${t}</button>`).join("")}</div>
+    <div class="cbody" data-k="res">${e.info["Función"]?`<p class="fn">${e.info["Función"]}</p>`:""}${chips?`<div class="kvs">${chips}</div>`:""}${here?"":`<button type="button" class="go">${WALK_ICON}Ir caminando hasta aquí</button>`}</div>
+    <div class="cbody" data-k="dat"><dl>${rows}</dl></div>`+
+    (pl.length?`<div class="cbody" data-k="pla"><div class="thumbs">${pl.map(id=>`<button type="button" class="thumb" data-p="${id}"><img src="${PL[id].src}" alt=""><span>${PL[id].t}</span></button>`).join("")}</div></div>`:"");
+  const setTab=k=>{info.querySelectorAll(".ctabs button").forEach(b=>b.classList.toggle("on",b.dataset.k===k)); info.querySelectorAll(".cbody").forEach(b=>b.hidden=b.dataset.k!==k)};
+  info.querySelectorAll(".ctabs button").forEach(b=>b.onclick=()=>{setTab(b.dataset.k); info.scrollTop=0}); setTab("res");
+  info.classList.add("show"); info.scrollTop=0; document.body.classList.toggle("card",narrow());
+  info.querySelector(".x").onclick=()=>{closeInfo(); highlight(null)};
+  const go=info.querySelector(".go"); if(go) go.onclick=()=>walkTo(e.tag);
+  info.querySelectorAll(".thumb").forEach(b=>b.onclick=()=>openPlano(b.dataset.p)); syncUI(); resize()}
+function closeInfo(){if(!$("info").classList.contains("show")) return; $("info").classList.remove("show"); document.body.classList.remove("card"); cardEq=null; syncUI(); resize()}
 function openPlano(id){const v=$("viewer"); v.querySelector("img").src=PL[id].src; v.querySelector(".vt").textContent=PL[id].t; v.classList.remove("zoom"); v.hidden=false}
 $("viewer").addEventListener("click",ev=>{const v=$("viewer"); if(ev.target.closest(".vx")){v.hidden=true;return} if(ev.target.tagName==="IMG") v.classList.toggle("zoom")});
-let downPos=null, look=null;
+const store=(k,v)=>{try{if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v)}catch(err){return null}};
+let downPos=null, look=null, looked=store("sinu9-mirar")==="1";
+const GROUND=new THREE.Plane(new V3(0,1,0),0), hitP=new V3();
 canvas.addEventListener("pointerdown",ev=>{downPos=[ev.clientX,ev.clientY]; stopAuto();
   if(walk){look={id:ev.pointerId,x:ev.clientX,y:ev.clientY}; canvas.setPointerCapture(ev.pointerId)}});
 canvas.addEventListener("pointermove",ev=>{if(!walk||!look||ev.pointerId!==look.id) return; const k=ev.pointerType==="touch"?.0075:.005;
   walk.yaw-=(ev.clientX-look.x)*k; walk.pitch=THREE.MathUtils.clamp(walk.pitch+(ev.clientY-look.y)*k,walk.mode===1?-1:-.12,walk.mode===1?1:1.2);
-  look.x=ev.clientX; look.y=ev.clientY});
+  look.x=ev.clientX; look.y=ev.clientY;
+  if(!looked&&downPos&&Math.hypot(ev.clientX-downPos[0],ev.clientY-downPos[1])>30){looked=true; store("sinu9-mirar","1"); syncUI()}});
 canvas.addEventListener("pointercancel",()=>look=null);
 canvas.addEventListener("wheel",ev=>{if(walk&&walk.mode===3) walk.dist=THREE.MathUtils.clamp(walk.dist*(ev.deltaY>0?1.12:.89),2.2,12)},{passive:true});
 canvas.addEventListener("pointerup",ev=>{look=null;
   if(!downPos||Math.hypot(ev.clientX-downPos[0],ev.clientY-downPos[1])>6) return;
   const r=canvas.getBoundingClientRect(); mouse.set((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1);
   ray.setFromCamera(mouse,camera); const hit=ray.intersectObjects([...pickables,...(lblOn?labels:[])],false)[0];
-  if(hit){const e=hit.object.userData.eq; highlight(e.tag); showInfo(e); if(narrow()) setSheet(false)}});
+  if(hit){const e=hit.object.userData.eq; if(walk) return walkTo(e.tag); highlight(e.tag); showInfo(e); if(narrow()) setSheet(false)}
+  else if(walk&&ray.ray.intersectPlane(GROUND,hitP)&&hitP.x>-6.5&&hitP.x<80.5&&hitP.z>-25.5&&hitP.z<27.5) go({x:hitP.x,z:hitP.z}) // tocar el piso: va hasta ese punto
+});
 
 let anim=null;
 const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
@@ -2279,22 +2337,25 @@ let realColors=false;
 $("bCol").onclick=e=>{realColors=!realColors; e.currentTarget.querySelector("span").textContent=realColors?"Colores reales":"Colores de proceso";
   e.currentTarget.classList.toggle("on",realColors);
   Object.entries(pipeMats).forEach(([k,m])=>m.color.set(realColors?REAL:P.streams[k].color))};
+$("bNote").onclick=()=>document.body.classList.toggle("noteon");
 
-// ---- recorrido ----
-let step=0, auto=null;
-function renderStep(){const s=TOUR[step];
-  $("p-tour").innerHTML=`<div class="step-n">Paso ${step+1} de ${TOUR.length}</div><div class="step-t">${s.t}</div><div class="step-d">${s.d}</div>
+// ---- recorrido: en el computador solo la primera frase; el resto con «Leer más» ----
+let step=0, auto=null, stepMore=false;
+const summary=html=>{const m=html.match(/^[\s\S]*?[.!?](?=\s+[A-ZÁÉÍÓÚÑ¿<])/); return m?m[0]:html};
+function renderStep(){const s=TOUR[step], d=!narrow()&&!stepMore?summary(s.d):s.d;
+  $("p-tour").innerHTML=`<div class="step-n">Paso ${step+1} de ${TOUR.length}</div><div class="step-t">${s.t}</div><div class="step-d">${d}${d!==s.d?' <button type="button" class="more" id="sMore">Leer más</button>':""}</div>
     <div class="step-nav"><button type="button" id="sPrev">Anterior</button><button type="button" class="prim" id="sNext">${step<TOUR.length-1?"Siguiente":"Volver al inicio"}</button></div>
     <button type="button" class="play${auto?" on":""}" id="sAuto">${auto?"⏸ Pausar recorrido":"▶ Recorrido automático"}</button>
     <div class="dots">${TOUR.map((_,i)=>`<span class="${i===step?"on":""}" data-i="${i}"></span>`).join("")}</div>`;
   $("mOpen").querySelector("b").textContent=`${step+1}/${TOUR.length}`; $("mOpen").querySelector("span").textContent=s.t;
+  if($("sMore")) $("sMore").onclick=()=>{stepMore=true; renderStep()};
   $("sPrev").onclick=()=>goto(step-1);
   $("sNext").onclick=()=>goto(step<TOUR.length-1?step+1:0);
   $("sAuto").onclick=()=>auto?stopAuto():startAuto();
   $("p-tour").querySelectorAll(".dots span").forEach(d=>d.onclick=()=>goto(+d.dataset.i))}
-function goto(i){stopAuto(); step=(i+TOUR.length)%TOUR.length; renderStep(); goStep()}
+function goto(i){stopAuto(); step=(i+TOUR.length)%TOUR.length; stepMore=false; renderStep(); goStep()}
 function goStep(){const s=TOUR[step]; if(s.cam) flyTo(s.cam.t,s.cam.d*(narrow()?1.3:1),...(s.cam.dir||[])); else if(s.eq) flyEq(s.eq[0],s.dist);
-  if(s.eq&&s.eq[0]){highlight(s.eq[0]); const e=P.equipment.find(x=>x.tag===s.eq[0]); if(e&&!narrow()) showInfo(e)} else {highlight(null); $("info").classList.remove("show"); resize()}}
+  if(s.eq&&s.eq[0]){highlight(s.eq[0]); const e=P.equipment.find(x=>x.tag===s.eq[0]); if(e&&!narrow()) showInfo(e)} else {highlight(null); closeInfo()}}
 function startAuto(){auto={t:performance.now()}; renderStep(); goStep()}
 function stopAuto(){if(!auto) return; auto=null; if($("sAuto")) {$("sAuto").textContent="▶ Recorrido automático"; $("sAuto").classList.remove("on")}}
 renderStep();
@@ -2312,7 +2373,7 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelect
 $("note").textContent=P.meta.nota;
 // hoja inferior en el celular: arranca recogida (solo «paso N · título» y ◀ ▶) para que se vea la planta
 let layoutUntil=0;
-function setSheet(open){$("side").classList.toggle("min",!open); if(open&&narrow()) $("info").classList.remove("show"); layoutUntil=performance.now()+320; resize()}
+function setSheet(open){$("side").classList.toggle("min",!open); if(open&&narrow()) closeInfo(); layoutUntil=performance.now()+320; syncUI(); resize()}
 $("grab").onclick=()=>setSheet($("side").classList.contains("min"));
 
 // =====================================================================
@@ -2356,8 +2417,6 @@ function aStar(s,g){const nx=GR.nx, N=grid.length, G=new Float32Array(N).fill(1e
 function inSight(a,b){const L=a.distanceTo(b), n=Math.ceil(L/.08), px=-(b.z-a.z)/L*.2, pz=(b.x-a.x)/L*.2;
   for(let k=0;k<=n;k++){const t=k/n, x=a.x+(b.x-a.x)*t, z=a.z+(b.z-a.z)*t; if(!isFree(x,z)||!isFree(x+px,z+pz)||!isFree(x-px,z-pz)) return false} return true}
 function smooth(pts){const out=[pts[0]]; let i=0; while(i<pts.length-1){let j=i+1; while(j+1<pts.length&&inSight(pts[i],pts[j+1])) j++; out.push(pts[j]); i=j} return out}
-function plan(e){const s=cellOf(op.pos.x,op.pos.z), g=nearestCell(e.focus[0],e.focus[2],comp[s]); if(g<0) return null;
-  return g===s?[op.pos.clone()]:(p=>p&&smooth(p))(aStar(s,g))}
 
 const op={pos:new V3(),model:null};
 function makeOperator(){const O=new THREE.Group(), B=new THREE.Group(); O.add(B); scene.add(O);
@@ -2379,60 +2438,99 @@ let walk=null;
 const K={}, joy={x:0,y:0,on:false};
 const wrapA=a=>Math.atan2(Math.sin(a),Math.cos(a));
 const coarse=()=>narrow()||matchMedia("(pointer:coarse)").matches;
+// aro que marca el destino en el piso
+const dest=new THREE.Mesh(new THREE.RingGeometry(.32,.48,32),new THREE.MeshBasicMaterial({color:"#ffb52e",transparent:true,opacity:.9,depthWrite:false,toneMapped:false}));
+dest.rotation.x=-PI/2; dest.visible=false; dest.renderOrder=3; scene.add(dest);
 function enterWalk(mode=3){if(!grid) buildGrid(); if(!op.model) makeOperator(); stopAuto(); anim=null;
   if(!walk){const t=controls.target, k=nearestCell(t.x,t.z,mainComp), v=t.clone().sub(camera.position), yaw=Math.atan2(v.x,v.z);
-    op.pos.copy(center(k)); walk={mode,yaw,bodyYaw:yaw,pitch:.3,dist:4.2,path:null,goal:null,phase:0,amp:0};
-    controls.enabled=false; op.model.visible=true}
-  walk.mode=mode; walk.pitch=mode===1?.06:.3; walkUI(); resize()}
-function exitWalk(){if(!walk) return; const w=walk; walk=null; look=null;
+    op.pos.copy(center(k)); walk={mode,yaw,bodyYaw:yaw,pitch:.3,dist:4.2,path:null,goal:null,phase:0,amp:0,vx:0,vz:0,look:new V3(op.pos.x,1.35,op.pos.z),hud:0};
+    controls.enabled=false; op.model.visible=true;
+    const q=new URLSearchParams(location.search); if(store("sinu9-guia")!=="1"&&!q.has("caminar")&&!q.has("ir")) showGuide()}
+  walk.mode=mode; walk.pitch=mode===1?.06:.3; syncUI(); resize()}
+function exitWalk(){if(!walk) return; const w=walk; walk=null; look=null; dest.visible=false;
   controls.target.set(op.pos.x,1.2,op.pos.z);
   if(w.mode===1) camera.position.set(op.pos.x-Math.sin(w.yaw)*7,4.5,op.pos.z-Math.cos(w.yaw)*7);
-  controls.enabled=true; op.model.visible=true; walkUI(); resize()}
-function walkUI(){$("bWalk").classList.toggle("on",!!walk); $("walkbar").hidden=!walk; $("joy").hidden=!(walk&&coarse());
-  if(walk) $("bView").querySelector("span").textContent=walk.mode===3?"1ª persona":"3ª persona"}
-function walkTo(tag){const e=P.equipment.find(x=>x.tag===tag); if(!e) return; if(!walk) enterWalk(3);
-  const path=plan(e); if(!path) return;
-  walk.path=path; walk.goal=e; walk.stuck=0; walk.replan=0; highlight(tag); $("info").classList.remove("show"); resize()}
-function arrive(e){walk.path=null; walk.goal=null; walk.face=Math.atan2(e.focus[0]-op.pos.x,e.focus[2]-op.pos.z);
-  highlight(e.tag); showInfo(e); if(narrow()) setSheet(false)}
+  controls.enabled=true; op.model.visible=true; syncUI(); resize()}
+// qué controles se ven: dependen del modo, del aparato y de si la ficha o la hoja tapan la parte de abajo
+function syncUI(){const w=!!walk, n=narrow(), card=$("info").classList.contains("show"), sheet=!$("side").classList.contains("min");
+  $("bWalk").classList.toggle("on",w); $("wmode").hidden=!w;
+  document.querySelectorAll(".seg button").forEach(b=>b.classList.toggle("on",+b.dataset.m===(w?walk.mode:0)));
+  const touch=w&&coarse()&&!(n&&(card||sheet));
+  $("joy").hidden=!touch; $("lookHint").hidden=!touch||looked; $("keys").hidden=!w||coarse();
+  $("wgo").hidden=!(w&&walk.path); if(!w||walk.path||(n&&(card||sheet))) $("near").hidden=true}
+document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>+b.dataset.m?enterWalk(+b.dataset.m):exitWalk());
 $("bWalk").onclick=()=>walk?exitWalk():enterWalk(3);
-$("bView").onclick=()=>enterWalk(walk.mode===3?1:3);
-$("bFree").onclick=()=>exitWalk();
+$("wCancel").onclick=()=>{if(!walk) return; walk.path=null; walk.goal=null; dest.visible=false; syncUI()};
+function showGuide(){const items=coarse()?[["Mover","Ponga el dedo en el círculo de abajo a la izquierda y deslícelo hacia donde quiere ir."],["Mirar","Arrastre el dedo en cualquier otra parte de la pantalla."],
+    ["Ir a un equipo","Toque un equipo o un punto del piso: el operador camina solo y, al llegar, se abre la ficha."],["Vista","Arriba elija 3ª persona (detrás del operador) o 1ª persona (sus ojos). «Libre» vuelve a la vista de siempre."]]
+   :[["Mover","W A S D o las flechas. Shift para trotar."],["Mirar","Arrastre con el mouse. La rueda acerca o aleja la cámara."],
+    ["Ir a un equipo","Haga clic en un equipo o en un punto del piso: el operador camina solo y, al llegar, se abre la ficha."],["Vista","Arriba elija 3ª persona, 1ª persona (tecla V) o «Libre» (tecla Esc)."]];
+  $("gList").innerHTML=items.map(([t,d],i)=>`<div class="gi"><i>${i+1}</i><div><b>${t}</b>${d}</div></div>`).join(""); $("guide").hidden=false}
+$("bHelp").onclick=showGuide;
+$("gOk").onclick=()=>{$("guide").hidden=true; store("sinu9-guia","1")};
+// rutas: A* hasta la celda libre más cercana al destino (equipo o punto del piso)
+function route(t){const s=cellOf(op.pos.x,op.pos.z), g=nearestCell(t.x,t.z,comp[s]); if(g<0) return null;
+  if(g===s) return [op.pos.clone(),center(g)]; const p=aStar(s,g); return p&&smooth(p)}
+function go(t){if(!walk) enterWalk(3); const p=route(t); if(!p) return;
+  Object.assign(walk,{path:p,goal:t,stuck:0,replan:0,view:null,face:null,hud:0});
+  const c=p[p.length-1]; dest.position.set(c.x,.03,c.z); dest.visible=true;
+  if(t.eq) highlight(t.eq.tag); else highlight(null); closeInfo(); syncUI()}
+function walkTo(tag){const e=P.equipment.find(x=>x.tag===tag); if(e) go({x:e.focus[0],z:e.focus[2],eq:e})}
+// al llegar: mira el equipo, la cámara lo encuadra y se abre la ficha
+function arrive(t){const w=walk; w.path=null; w.goal=null; dest.visible=false; $("wgo").hidden=true;
+  if(t&&t.eq) lookAtEq(t.eq); syncUI()}
+function lookAtEq(e){const w=walk, b=new THREE.Box3().setFromObject(groups[e.tag]);
+  w.face=Math.atan2(e.focus[0]-op.pos.x,e.focus[2]-op.pos.z); w.view={c:b.getCenter(new V3()),r:b.getSize(new V3()).length()/2}; w.viewOff=null;
+  highlight(e.tag); if(narrow()) $("side").classList.add("min"); showInfo(e)}
+const boxDist=b=>Math.hypot(Math.max(b.min.x-op.pos.x,0,op.pos.x-b.max.x),Math.max(b.min.z-op.pos.z,0,op.pos.z-b.max.z));
+const distEq=e=>{const b=eqBoxes.find(x=>x.eq===e); return b?boxDist(b):1e9};
+function nearEq(){if(!walk) return null; let best=null, bd=1.3;
+  for(const b of eqBoxes){if(b.min.y>=1.9) continue; const d=boxDist(b); if(d<bd){bd=d; best=b.eq}}
+  return best}
+$("near").onclick=()=>{const e=$("near").eq; if(e&&walk) lookAtEq(e)};
 addEventListener("keydown",ev=>{if(!walk||ev.target.closest&&ev.target.closest("input,textarea")) return; K[ev.code]=true;
-  if(/^Arrow/.test(ev.code)) ev.preventDefault(); if(ev.code==="KeyV") $("bView").click(); if(ev.code==="Escape") exitWalk()});
+  if(/^Arrow/.test(ev.code)) ev.preventDefault(); if(ev.code==="KeyV") enterWalk(walk.mode===3?1:3);
+  if(ev.code==="Escape"){if(!$("guide").hidden) $("gOk").click(); else exitWalk()}});
 addEventListener("keyup",ev=>{K[ev.code]=false});
 addEventListener("blur",()=>{for(const k in K) K[k]=false});
 {const J=$("joy"), knob=J.querySelector("i"); let id=null;
   const set=ev=>{const r=J.getBoundingClientRect(), R=r.width/2; let x=(ev.clientX-r.left-R)/R, y=(ev.clientY-r.top-R)/R; const m=Math.hypot(x,y); if(m>1){x/=m;y/=m}
     joy.x=x; joy.y=-y; knob.style.transform=`translate(${x*R*.62}px,${y*R*.62}px)`};
-  J.addEventListener("pointerdown",ev=>{id=ev.pointerId; J.setPointerCapture(id); joy.on=true; set(ev);
-    if(narrow()&&$("info").classList.contains("show")){$("info").classList.remove("show"); resize()}}); // al caminar, la ficha no tapa la vista
+  J.addEventListener("pointerdown",ev=>{id=ev.pointerId; J.setPointerCapture(id); joy.on=true; set(ev)});
   J.addEventListener("pointermove",ev=>{if(ev.pointerId===id) set(ev)});
   const end=ev=>{if(ev.pointerId!==id) return; id=null; joy.on=false; joy.x=joy.y=0; knob.style.transform=""};
   J.addEventListener("pointerup",end); J.addEventListener("pointercancel",end)}
 
-const camWant=new V3();
+const camWant=new V3(), camT=new V3(), camRay=new THREE.Ray(), hitV=new V3();
+// distancia libre desde el punto que se mira hasta la cámara (si un equipo se mete en medio, la cámara se acerca)
+function clearLen(off,dist,pitch){const y=walk.yaw+off, cp=Math.cos(pitch);
+  camRay.origin.copy(camT); camRay.direction.set(-Math.sin(y)*cp,Math.sin(pitch),-Math.cos(y)*cp); let L=dist;
+  for(const b of eqBoxes){if(b.containsPoint(camT)||(walk.view&&b.eq.tag===selected)) continue; if(camRay.intersectBox(b,hitV)){const d=hitV.distanceTo(camT); if(d<L) L=Math.max(1.4,d-.3)}}
+  return L}
 function updateWalk(dt,now){const w=walk;
   let f=(K.KeyW||K.ArrowUp?1:0)-(K.KeyS||K.ArrowDown?1:0), s=(K.KeyD?1:0)-(K.KeyA?1:0), speed=K.ShiftLeft||K.ShiftRight?3.2:1.6;
   w.yaw+=((K.ArrowLeft?1:0)-(K.ArrowRight?1:0))*dt*1.9;
   if(joy.on){f=joy.y; s=joy.x; speed=2.6}
   let m=Math.hypot(f,s); if(m>1){f/=m; s/=m; m=1}
-  let mx=0, mz=0;
-  if(m>.08){w.path=null; w.goal=null; w.face=null; const sy=Math.sin(w.yaw), cy=Math.cos(w.yaw);
-    mx=(sy*f-cy*s)*speed; mz=(cy*f+sy*s)*speed}
+  let tx=0, tz=0;
+  if(m>.08){ // a mano: cancela la ruta y suelta el encuadre del equipo
+    if(w.path){w.path=null; w.goal=null; dest.visible=false; syncUI()} w.view=null; w.face=null;
+    if(narrow()&&$("info").classList.contains("show")) closeInfo();
+    const sy=Math.sin(w.yaw), cy=Math.cos(w.yaw); tx=(sy*f-cy*s)*speed; tz=(cy*f+sy*s)*speed}
   else if(w.path){let wp=w.path[1]; // sigue el camino libre que encontró A*
-    while(wp&&Math.hypot(wp.x-op.pos.x,wp.z-op.pos.z)<.15){w.path.shift(); wp=w.path[1]}
+    while(wp&&Math.hypot(wp.x-op.pos.x,wp.z-op.pos.z)<.18){w.path.shift(); wp=w.path[1]}
     if(!wp) arrive(w.goal);
-    else {const dx=wp.x-op.pos.x, dz=wp.z-op.pos.z, d=Math.hypot(dx,dz), v=Math.min(3.2,.6+d*3);
-      mx=dx/d*v; mz=dz/d*v; w.yaw+=wrapA(Math.atan2(dx,dz)-w.yaw)*Math.min(1,dt*(w.mode===1?4:1.6))}}
-  // choques: se mueve por eje para que se deslice a lo largo del equipo
-  const x0=op.pos.x, z0=op.pos.z, nx=x0+mx*dt, nz=z0+mz*dt;
-  if(isFree(nx,z0)) op.pos.x=nx; if(isFree(op.pos.x,nz)) op.pos.z=nz;
+    else {const last=w.path[w.path.length-1], dx=wp.x-op.pos.x, dz=wp.z-op.pos.z, d=Math.hypot(dx,dz), v=Math.min(3.2,.7+Math.hypot(last.x-op.pos.x,last.z-op.pos.z)*1.6);
+      tx=dx/d*v; tz=dz/d*v; w.yaw+=wrapA(Math.atan2(dx,dz)-w.yaw)*Math.min(1,dt*(w.mode===1?4:1.6))}}
+  // arranca y frena suave; choques por eje para que se deslice a lo largo del equipo
+  const k=Math.min(1,dt*7); w.vx+=(tx-w.vx)*k; w.vz+=(tz-w.vz)*k;
+  const x0=op.pos.x, z0=op.pos.z, nx=x0+w.vx*dt, nz=z0+w.vz*dt;
+  if(isFree(nx,z0)) op.pos.x=nx; else w.vx=0; if(isFree(op.pos.x,nz)) op.pos.z=nz; else w.vz=0;
   const moved=Math.hypot(op.pos.x-x0,op.pos.z-z0), v=moved/Math.max(dt,1e-3);
   if(w.path){w.stuck=moved<.002?w.stuck+dt:0; // trabado contra algo: se recalcula el camino desde donde está
-    if(w.stuck>.4){w.stuck=0; const p=++w.replan<4&&plan(w.goal); if(p) w.path=p; else arrive(w.goal)}}
+    if(w.stuck>.4){w.stuck=0; const p=++w.replan<4&&route(w.goal); if(p) w.path=p; else arrive(w.goal)}}
   if(w.face!=null){w.yaw+=wrapA(w.face-w.yaw)*Math.min(1,dt*3); if(Math.abs(wrapA(w.face-w.yaw))<.01) w.face=null}
-  const bodyTo=w.mode===1?w.yaw:moved>1e-4?Math.atan2(op.pos.x-x0,op.pos.z-z0):w.face!=null?w.face:w.bodyYaw;
+  const bodyTo=w.mode===1?w.yaw:moved>1e-4?Math.atan2(op.pos.x-x0,op.pos.z-z0):w.view?Math.atan2(w.view.c.x-op.pos.x,w.view.c.z-op.pos.z):w.bodyYaw;
   w.bodyYaw+=wrapA(bodyTo-w.bodyYaw)*Math.min(1,dt*10);
   // paso: piernas y brazos opuestos, un poco de rebote
   w.amp+=(Math.min(1.3,v/1.4)-w.amp)*Math.min(1,dt*8); w.phase+=dt*v*4.2;
@@ -2440,32 +2538,49 @@ function updateWalk(dt,now){const w=walk;
   op.legs[0].rotation.x=a; op.legs[1].rotation.x=-a; op.arms[0].rotation.x=-a*.8; op.arms[1].rotation.x=a*.8;
   op.body.position.y=Math.abs(Math.cos(w.phase))*.035*w.amp;
   op.model.position.copy(op.pos); op.model.rotation.y=w.bodyYaw; op.model.visible=w.mode===3;
-  const sy=Math.sin(w.yaw), cy=Math.cos(w.yaw);
-  if(w.mode===1){const cp=Math.cos(w.pitch); camera.position.set(op.pos.x+sy*.12,1.65+op.body.position.y*.5,op.pos.z+cy*.12);
-    camera.lookAt(camera.position.x+sy*cp,camera.position.y-Math.sin(w.pitch),camera.position.z+cy*cp)}
-  else {const cp=Math.cos(w.pitch); camWant.set(op.pos.x-sy*cp*w.dist,1.45+Math.sin(w.pitch)*w.dist,op.pos.z-cy*cp*w.dist); camWant.y=Math.max(.4,camWant.y);
-    camera.position.lerp(camWant,1-Math.exp(-dt*9)); camera.lookAt(op.pos.x,1.35,op.pos.z)}}
+  const sy=Math.sin(w.yaw), cy=Math.cos(w.yaw), sm=1-Math.exp(-dt*6);
+  if(w.mode===1){if(w.view){const dxz=Math.hypot(w.view.c.x-op.pos.x,w.view.c.z-op.pos.z); w.pitch+=(THREE.MathUtils.clamp(Math.atan2(1.65-w.view.c.y,dxz),-.8,.8)-w.pitch)*Math.min(1,dt*3)}
+    const cp=Math.cos(w.pitch); camera.position.set(op.pos.x+sy*.12,1.65+op.body.position.y*.5,op.pos.z+cy*.12);
+    camera.lookAt(camera.position.x+sy*cp,camera.position.y-Math.sin(w.pitch),camera.position.z+cy*cp); camera.rotateX(-viewTilt)}
+  else {camT.set(op.pos.x,1.35,op.pos.z); let dist=w.dist, pitch=w.pitch;
+    let off=0;
+    if(w.view){camT.lerp(w.view.c,.5); camT.y=Math.min(camT.y,2.2); dist=Math.min(9,Math.max(w.dist,w.view.r*1.5+2.5)); pitch=Math.max(pitch,.32); // operador y equipo juntos en cuadro
+      if(w.viewOff==null&&w.face==null){let best=-1; for(const o of [.55,-.55,0,1.1,-1.1]){const L=clearLen(o,dist,pitch); if(L>best+.3){best=L; w.viewOff=o} if(L>=dist*.95) break}} // la cámara de lado, donde no la tape nada
+      off=w.viewOff??.55}
+    const L=clearLen(off,dist,pitch);
+    camWant.copy(camT).addScaledVector(camRay.direction,L); camWant.y=Math.max(.4,camWant.y);
+    camera.position.lerp(camWant,sm); w.look.lerp(camT,sm); camera.lookAt(w.look); camera.rotateX(-viewTilt)}
+  // avisos: distancia al destino y equipo cercano (5 veces por segundo)
+  w.hud-=dt; if(w.hud<=0){w.hud=.2;
+    if(w.path){let rem=0, p=op.pos; for(let i=1;i<w.path.length;i++){rem+=Math.hypot(w.path[i].x-p.x,w.path[i].z-p.z); p=w.path[i]}
+      $("wgo").querySelector("span").textContent=`${w.goal&&w.goal.eq?"Yendo a "+w.goal.eq.tag:"Yendo al punto marcado"} · ${Math.max(1,Math.round(rem))} m`; $("wgo").hidden=false}
+    const nb=$("near"), e=!w.path&&nearEq(), blocked=narrow()&&($("info").classList.contains("show")||!$("side").classList.contains("min"));
+    if(e&&e!==cardEq&&!blocked){if(nb.eq!==e){nb.eq=e; nb.innerHTML=`<b>${e.tag}</b>Ver ficha`} nb.hidden=false} else nb.hidden=true}}
 
 // =====================================================================
 // Bucle: render continuo liviano y ajuste automático de resolución
 // =====================================================================
+let viewTilt=0;
 function resize(){const w=innerWidth,h=innerHeight; renderer.setSize(w,h,false); frame()}
-function frame(){const w=innerWidth,h=innerHeight;
-  if(narrow()){// el centro de la vista queda entre la barra de arriba y la hoja de abajo
-    const top=$("top").getBoundingClientRect().bottom, bot=$("side").getBoundingClientRect().top, s=Math.round((top+bot)/2-h/2), fh=h+2*Math.abs(s);
-    camera.fov=w<h?(walk?72:62):(walk?60:50); camera.aspect=w/fh; camera.setViewOffset(w,fh,0,s<0?2*-s:0,w,h)}
-  else {// el centro de la vista queda entre el panel de la izquierda y la ficha del equipo
-    const right=$("info").classList.contains("show")?w-384:w, s=Math.round((352+right)/2-w/2), fw=w+2*Math.abs(s);
+function frame(){const w=innerWidth,h=innerHeight, card=$("info").classList.contains("show");
+  if(narrow()){// el centro de la vista queda entre la barra de arriba y lo que tape abajo (ficha u hoja)
+    const top=$("top").getBoundingClientRect().bottom, bot=(card?$("info"):$("side")).getBoundingClientRect().top, s=Math.round((top+bot)/2-h/2), fh=h+2*Math.abs(s);
+    camera.fov=w<h?(walk?72:62):(walk?60:50);
+    if(walk){viewTilt=Math.atan(Math.tan(camera.fov*PI/360)*-2*s/h); camera.aspect=w/h; camera.clearViewOffset()} // caminando se inclina la cámara (sin deformar)
+    else {viewTilt=0; camera.aspect=w/fh; camera.setViewOffset(w,fh,0,s<0?2*-s:0,w,h)}}
+  else {viewTilt=0; // el centro de la vista queda entre el panel de la izquierda y la ficha del equipo
+    const left=$("side").getBoundingClientRect().right, right=card?$("info").getBoundingClientRect().left:w, s=Math.round((left+right)/2-w/2), fw=w+2*Math.abs(s);
     camera.fov=walk?58:42; camera.aspect=fw/h; camera.setViewOffset(fw,h,s<0?2*-s:0,0,w,h)}
   camera.updateProjectionMatrix()}
-addEventListener("resize",resize); resize();
+addEventListener("resize",()=>{resize(); syncUI()}); resize();
 renderer.shadowMap.needsUpdate=true;
 let last=performance.now(), acc=0, frames=0, slow=0;
 function loop(now){const dt=Math.min(.05,(now-last)/1000); last=now;
   if(now<layoutUntil) frame(); // mientras la hoja sube o baja
   if(anim){const k=Math.min(1,(now-anim.t0)/anim.ms), e=ease(k); camera.position.lerpVectors(anim.p0,anim.p1,e); controls.target.lerpVectors(anim.q0,anim.q1,e); if(k>=1) anim=null}
-  if(auto&&!anim&&now-auto.t>(auto.wait||0)){auto.t=now; auto.wait=8500; if(auto.started){step=(step+1)%TOUR.length; renderStep(); goStep()} auto.started=true}
+  if(auto&&!anim&&now-auto.t>(auto.wait||0)){auto.t=now; auto.wait=8500; if(auto.started){step=(step+1)%TOUR.length; stepMore=false; renderStep(); goStep()} auto.started=true}
   if(walk) updateWalk(dt,now); else controls.update();
+  if(dest.visible) dest.scale.setScalar(1+.18*Math.sin(now*.006));
   if(flowOn){flowTex.offset.x-=dt*1.1; flowFast.offset.x-=dt*1.9}
   spinners.forEach(b=>{if(b.userData.sway) b.rotation.y=.35+Math.sin(now*.0006)*.25; else b.rotateY(dt*b.userData.spin)});
   flames.forEach(F=>F.children.forEach((s,i)=>{const [w,h,o]=s.userData.b, f=1+.13*Math.sin(now*.011+i*2.1)+.07*Math.sin(now*.027+i);
@@ -2486,8 +2601,8 @@ function loop(now){const dt=Math.min(.05,(now-last)/1000); last=now;
   if(q.get("ir")) walkTo(q.get("ir"))}
 requestAnimationFrame(t=>{last=t; loop(t); $("loading").classList.add("done"); setTimeout(()=>$("loading").remove(),600)});
 window.__plant={scene,camera,controls,groups,flyEq,renderer,info:()=>renderer.info.render,
-  walk:()=>walk&&{mode:walk.mode,pos:op.pos.toArray(),path:walk.path&&walk.path.length,goal:walk.goal&&walk.goal.tag},
-  grid:()=>grid&&{grid,comp,mainComp,GR},enterWalk,exitWalk,walkTo,keys:K,joy,
+  walk:()=>walk&&{mode:walk.mode,pos:op.pos.toArray(),path:walk.path&&walk.path.length,goal:walk.goal&&(walk.goal.eq?walk.goal.eq.tag:"punto")},
+  grid:()=>grid&&{grid,comp,mainComp,GR},eqBoxes,W:()=>walk,enterWalk,exitWalk,walkTo,go,keys:K,joy,
   sim:(n=1,dt=.05)=>{for(let i=0;i<n&&walk;i++) updateWalk(dt,0)}}; // pruebas sin pantalla
 })();
 </script>
