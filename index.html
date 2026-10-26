@@ -14,8 +14,18 @@ html,body{margin:0;height:100%;overflow:hidden;background:#cfd8de;font-family:va
 .top h1{margin:0;font-size:17px;font-weight:800;letter-spacing:.01em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top h1 small{display:block;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
 .tbs{display:flex;gap:6px}
-.tb{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--ink);border-radius:10px;padding:8px 10px;font:700 12.5px var(--font);cursor:pointer;white-space:nowrap}
+.tb{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--ink);border-radius:10px;padding:7px 10px;font:700 12.5px var(--font);cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.tb svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .tb.on{background:var(--accent);color:#1d1404;border-color:var(--accent)}
+#mini{display:none}
+.more-b{margin-top:10px;background:none;border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:8px 12px;font:700 13px var(--font);cursor:pointer}
+.go{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:12px;min-height:42px;border-radius:10px;border:1px solid var(--accent);background:rgba(240,173,46,.14);color:var(--accent);font:800 14px var(--font);cursor:pointer}
+.go svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#walkbar{position:fixed;z-index:6;left:50%;top:70px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 8px;backdrop-filter:blur(8px)}
+#walkbar[hidden],#joy[hidden]{display:none}
+#walkHint{font-size:12px;color:var(--muted);padding:0 6px;white-space:nowrap}
+#joy{position:fixed;z-index:6;left:18px;bottom:calc(74px + env(safe-area-inset-bottom,0px));width:124px;height:124px;border-radius:50%;background:rgba(14,22,30,.38);border:2px solid rgba(255,255,255,.4);touch-action:none}
+#joy i{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(240,173,46,.9);box-shadow:0 2px 8px rgba(0,0,0,.35)}
 .panel{position:fixed;z-index:6;background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(8px)}
 #side{left:12px;top:72px;bottom:12px;width:340px;border-radius:14px;display:flex;flex-direction:column;overflow:hidden}
 #grab{display:none}
@@ -48,6 +58,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#cfd8de;font-family:va
 #info h2{margin:0;font-size:13px;font-family:var(--mono);color:var(--accent)}
 #info h3{margin:2px 0 10px;font-size:19px;padding-right:24px}
 #info dl{margin:0;display:grid;grid-template-columns:112px 1fr;gap:6px 10px;font-size:13.5px;line-height:1.45}
+#info dl[hidden]{display:none}
 #info dt{color:var(--muted)}
 #info dd{margin:0}
 #info .x{position:absolute;right:10px;top:8px;background:none;border:0;color:var(--muted);font-size:24px;cursor:pointer;line-height:1}
@@ -74,18 +85,32 @@ html,body{margin:0;height:100%;overflow:hidden;background:#cfd8de;font-family:va
 #loading i{width:34px;height:34px;border-radius:50%;border:3px solid #2b3a48;border-top-color:var(--accent);animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 @media (max-width:820px){
-  .top{flex-wrap:wrap;padding-bottom:8px}
-  .top h1{font-size:15px;flex-basis:100%}
-  .tbs{width:100%;overflow-x:auto;scrollbar-width:none}
-  .tbs::-webkit-scrollbar{display:none}
-  .tb{padding:7px 9px;font-size:12px}
-  #side{left:0;right:0;top:auto;bottom:0;width:auto;height:36%;border-radius:16px 16px 0 0;padding-bottom:env(safe-area-inset-bottom,0px);transition:height .25s}
-  #side.min{height:calc(52px + env(safe-area-inset-bottom,0px))}
-  #side.min .pane{display:none}
+  /* celular: una sola fila de íconos y el 3D casi a pantalla completa */
+  .top{padding:calc(6px + env(safe-area-inset-top,0px)) 10px 6px;gap:6px}
+  .top h1{font-size:15px}
+  .top h1 small{display:none}
+  .tbs{gap:5px}
+  .tb{width:40px;height:40px;padding:0;justify-content:center}
+  .tb span{display:none}
+  .tb svg{width:20px;height:20px}
+  #side{left:0;right:0;top:auto;bottom:0;width:auto;height:44%;border-radius:16px 16px 0 0;padding-bottom:env(safe-area-inset-bottom,0px);transition:height .25s}
+  #side.min{height:calc(56px + env(safe-area-inset-bottom,0px))}
+  #side.min .pane,#side.min .tabs,#side.min #grab{display:none}
+  #side.min #mini{display:flex}
+  #mini{align-items:center;gap:6px;height:56px;padding:0 8px;flex:none}
+  #mini button{background:none;border:0;color:var(--ink);cursor:pointer;font:inherit}
+  #mPrev,#mNext{width:44px;height:44px;border-radius:10px;font-size:16px!important;background:rgba(255,255,255,.07)!important}
+  #mOpen{flex:1;min-width:0;height:44px;display:flex;align-items:center;gap:8px;text-align:left;font:700 14px var(--font)!important}
+  #mOpen b{color:var(--accent);font-size:12px;flex:none}
+  #mOpen span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #mOpen i{font-style:normal;color:var(--muted);font-size:12px;flex:none}
   #grab{display:block;width:100%;height:18px;border:0;background:none;cursor:pointer;position:relative;flex:none}
   #grab::after{content:"";position:absolute;left:50%;top:7px;width:42px;height:5px;margin-left:-21px;border-radius:3px;background:#4a5b6b}
-  #info{left:8px;right:8px;width:auto;top:96px;max-height:calc(64% - 100px)}
-  #info dl{grid-template-columns:96px 1fr;font-size:13px}
+  #info{left:8px;right:8px;width:auto;top:calc(60px + env(safe-area-inset-top,0px));max-height:min(46%,calc(100% - 140px));padding:12px 14px}
+  #info h3{font-size:17px;margin-bottom:8px}
+  #info dl{grid-template-columns:104px 1fr;font-size:13px}
+  #walkbar{left:auto;right:14px;top:auto;transform:none;bottom:calc(74px + env(safe-area-inset-bottom,0px));flex-direction:column;padding:6px}
+  #walkHint{display:none}
   .note{display:none}
 }
 </style>
@@ -93,16 +118,18 @@ html,body{margin:0;height:100%;overflow:hidden;background:#cfd8de;font-family:va
 <body>
 <div id="loading"><div><i></i>Cargando la planta en 3D…</div></div>
 <canvas id="c" tabindex="0"></canvas>
-<div class="top">
+<div class="top" id="top">
   <h1><small>Recorrido 3D · Tren B · CPF</small>Planta SINÚ 9</h1>
   <div class="tbs">
-    <button class="tb on" id="bFlow" type="button">Flujo</button>
-    <button class="tb on" id="bLbl" type="button">Nombres</button>
-    <button class="tb" id="bCol" type="button">Colores de proceso</button>
-    <button class="tb" id="bHome" type="button">Vista general</button>
+    <button class="tb on" id="bFlow" type="button" title="Flujo animado" aria-label="Flujo animado"><svg viewBox="0 0 24 24"><path d="M3 8h14M13 4l4 4-4 4M21 16H7M11 12l-4 4 4 4"/></svg><span>Flujo</span></button>
+    <button class="tb on" id="bLbl" type="button" title="Nombres de los equipos" aria-label="Nombres de los equipos"><svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.4"/></svg><span>Nombres</span></button>
+    <button class="tb" id="bCol" type="button" title="Colores de proceso o colores reales" aria-label="Colores de proceso o colores reales"><svg viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg><span>Colores de proceso</span></button>
+    <button class="tb" id="bWalk" type="button" title="Caminar por la planta" aria-label="Caminar por la planta"><svg viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="M10 21l2-6 3 3v3M8 12l2-4 4 1 2 4 3 1M12 15l-1-5"/></svg><span>Caminar</span></button>
+    <button class="tb" id="bHome" type="button" title="Vista general" aria-label="Vista general"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10"/></svg><span>Vista general</span></button>
   </div>
 </div>
-<div class="panel" id="side">
+<div class="panel min" id="side">
+  <div id="mini"><button id="mPrev" type="button" aria-label="Paso anterior">◀</button><button id="mOpen" type="button"><b></b><span></span><i>▲</i></button><button id="mNext" type="button" aria-label="Paso siguiente">▶</button></div>
   <button id="grab" type="button" aria-label="Mostrar u ocultar el panel"></button>
   <div class="tabs">
     <button class="tab active" data-p="tour" type="button">Recorrido</button>
@@ -117,6 +144,10 @@ html,body{margin:0;height:100%;overflow:hidden;background:#cfd8de;font-family:va
 <div id="viewer" hidden><div class="vh"><div class="vt"></div><button class="vx" type="button">Cerrar</button></div>
   <div class="vb"><img alt="Plano del equipo"></div><div class="vn">Toque el plano para ampliarlo</div></div>
 <div class="note" id="note"></div>
+<div id="walkbar" hidden><button class="tb" id="bView" type="button" title="Cambiar entre 1ª y 3ª persona" aria-label="Cambiar entre 1ª y 3ª persona"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>1ª persona</span></button>
+  <button class="tb" id="bFree" type="button" title="Volver a la vista libre" aria-label="Volver a la vista libre"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Vista libre</span></button>
+  <span id="walkHint">WASD o flechas: caminar · Shift: trotar · arrastre: mirar</span></div>
+<div id="joy" hidden><i></i></div>
 <script>console.warn('Scripts "build/three.js" and "build/three.min.js" are deprecated with r150+, and will be removed with r160. Please use ES Modules or alternatives: https://threejs.org/docs/index.html#manual/en/introduction/Installation'),
 /**
  * @license
@@ -1621,6 +1652,7 @@ const M={
   ariel:std("#4a5968",.48,.35), panel:std("#c4c9cd",.55,.2), teal:std("#2f5f50",.5,.2), container:std("#e3e6e8",.6,.15),
   cqsn:std("#c9752b",.65,.15), bodega:std("#4b6a86",.6,.15), glass:std("#7fd3e6",.08,.2), win:std("#36586f",.12,.7),
   skin:std("#b98260",.7,0), vest:std("#ff7a12",.6,0), pants:std("#243452",.85,0), hat:std("#f6f6f2",.38,.05),
+  refl:std("#e4e8eb",.28,.55,{emissive:"#585d62"}),
   rubber:std("#151617",.9,0), tree:std("#3f6b33",.9,0), tree2:std("#56803f",.9,0), trunk:std("#5b4636",.95,0),
   grate:std("#6b737a",.6,.6,{map:TX.grate,alphaTest:.5,side:THREE.DoubleSide}),
   louver:std("#ffffff",.6,.3,{map:TX.louver}), core:std("#ffffff",.6,.4,{map:TX.core}),
@@ -1785,6 +1817,7 @@ function bake(G,userData,parent){G.updateMatrixWorld(true); const buckets=new Ma
 // Equipos
 // =====================================================================
 const P=PLANT, BUILD={};
+const posts=[]; // [x, z, medio ancho]: columnas y postes que el operador no puede atravesar
 const at=(G,e,dx=0,dz=0)=>{G.position.set(e.focus[0]+dx,0,e.focus[2]+dz)};
 
 BUILD["V-101"]=(G,e)=>{at(G,e); const r=.457,L=3.048,y0=.85;
@@ -2079,11 +2112,12 @@ const flameMat=new THREE.SpriteMaterial({map:canvasTex(64,128,(x,w,h)=>{const g=
 flameCore=new THREE.SpriteMaterial({map:flameMat.map,depthWrite:false,transparent:true,toneMapped:false,color:"#ffd27a"});
 
 BUILD["RACK"]=(G,e)=>{G.position.set(0,0,0);
-  for(let x=2;x<=68;x+=6){[-4,-1].forEach(z=>{box(G,M.concrete,.6,.3,.6,x,.15,z); beam(G,[x,.3,z],[x,5.15,z],.2,.2)});
+  for(let x=2;x<=68;x+=6){[-4,-1].forEach(z=>{box(G,M.concrete,.6,.3,.6,x,.15,z); beam(G,[x,.3,z],[x,5.15,z],.2,.2); posts.push([x,z,.3])});
     [3.85,5.0].forEach(y=>beam(G,[x,y,-4.1],[x,y,-.9],.15,.15));
     [-4,-1].forEach(z=>beam(G,[x,3.3,z],[x+(x<68?.6:-.6),3.85,z],.08,.08))}
   [-4,-1].forEach(z=>[3.85,5.0].forEach(y=>beam(G,[2,y,z],[68,y,z],.12,.1)));
-  [14,38,56].forEach(x=>[-4,-1].forEach(z=>{beam(G,[x,.35,z],[x+6,3.8,z],.08,.08); beam(G,[x+6,.35,z],[x,3.8,z],.08,.08)}))};
+  [14,38,56].forEach(x=>[-4,-1].forEach(z=>{beam(G,[x,.35,z],[x+6,3.8,z],.08,.08); beam(G,[x+6,.35,z],[x,3.8,z],.08,.08);
+    for(let k=.5;k<6;k+=.5) posts.push([x+k,z,.1])}))}; // las diagonales cierran ese vano
 
 // Respaldo: equipos sin modelo propio usan las piezas del JSON
 function fromParts(G,e){e.parts.forEach(p=>{const mat=std(p.c);
@@ -2134,7 +2168,7 @@ Object.entries(P.streams).forEach(([k,s])=>{pipeMats[k]=std(s.color,.42,.25); fl
     for(let s=1.2;s<L-.8;s+=3.6){const t=s/L, x=a[0]+(b[0]-a[0])*t, z=a[2]+(b[2]-a[2])*t; if(inRack(x,z)||inEq(x,y,z)) continue;
       if(y<.7){box(S,M.concrete,alongX?.25:.6,Math.max(.05,y-r),alongX?.6:.25,x,(y-r)/2,z); continue}
       if(y>6) continue;
-      box(S,M.concrete,.4,.2,.4,x,.1,z); box(S,M.steel,.12,y-r-.2,.12,x,(y-r+.2)/2,z); box(S,M.steel,alongX?.12:.6,.08,alongX?.6:.12,x,y-r-.04,z)}});
+      box(S,M.concrete,.4,.2,.4,x,.1,z); box(S,M.steel,.12,y-r-.2,.12,x,(y-r+.2)/2,z); posts.push([x,z,.2]); box(S,M.steel,alongX?.12:.6,.08,alongX?.6:.12,x,y-r-.04,z)}});
   bake(S,{})}
 
 // ---- entorno: terreno, patio, cerca, postes, árboles, personas ----
@@ -2161,8 +2195,8 @@ Object.entries(P.streams).forEach(([k,s])=>{pipeMats[k]=std(s.color,.42,.25); fl
     sph(E,rnd()>.5?M.tree:M.tree2,1.6*s,x,2.9*s,z,8); sph(E,M.tree,1.2*s,x+.8*s,3.4*s,z-.4*s,7); sph(E,M.tree2,1.1*s,x-.7*s,3.6*s,z+.5*s,7)}
   bake(E,{});
   const W=new THREE.Group();
-  person(W,59.2,-8.4,PI*.9); person(W,19.6,-8.0,-PI*.6); person(W,15.2,11.1,PI); person(W,33.2,-7.4,PI*.15,M.blue); person(W,47.0,-1.9,PI*1.2);
-  extintor(W,25.8,-6.0); extintor(W,44.2,9.2); extintor(W,11.5,-7.6);
+  [[59.2,-8.4,PI*.9],[19.6,-8.0,-PI*.6],[15.2,11.1,PI],[33.2,-7.4,PI*.15,M.blue],[47.0,-1.9,PI*1.2]].forEach(([x,z,ry,v])=>{person(W,x,z,ry,v); posts.push([x,z,.22])});
+  [[25.8,-6.0],[44.2,9.2],[11.5,-7.6]].forEach(([x,z])=>{extintor(W,x,z); posts.push([x,z,.15])});
   bake(W,{})}
 
 // =====================================================================
@@ -2199,17 +2233,32 @@ function highlight(tag){
   groups[tag].children.forEach(m=>{if(!m.isMesh) return; const o=m.material;
     let h=hiCache.get(o); if(!h){h=o.clone(); h.emissive=new THREE.Color("#ffb52e"); h.emissiveIntensity=.05; hiCache.set(o,h)} m.userData.orig=o; m.material=h})}
 const PL=window.PLANOS||{};
+const WALK_ICON='<svg viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="M10 21l2-6 3 3v3M8 12l2-4 4 1 2 4 3 1M12 15l-1-5"/></svg>';
+const KEY=["Función","Dimensiones","TAG mantenimiento","Capacidad"]; // lo que se ve primero en el celular
 function showInfo(e){const info=$("info");
-  const rows=Object.entries(e.info).map(([k,v])=>`<dt>${k}</dt><dd${/ESTIMAD|[Aa]proximad/.test(v)?' class="est"':''}>${v}</dd>`).join("");
+  const row=([k,v])=>`<dt>${k}</dt><dd${/ESTIMAD|[Aa]proximad/.test(v)?' class="est"':''}>${v}</dd>`, all=Object.entries(e.info);
+  const main=narrow()?all.filter(([k])=>KEY.includes(k)).slice(0,4):all, rest=all.filter(r=>!main.includes(r));
   const pl=(e.planos||[]).filter(id=>PL[id]).map(id=>`<button type="button" class="thumb" data-p="${id}"><img src="${PL[id].src}" alt=""><span>${PL[id].t}</span></button>`).join("");
-  info.innerHTML=`<button class="x" aria-label="Cerrar" type="button">×</button><h2>${e.tag}</h2><h3>${e.name}</h3><dl>${rows}</dl>${pl?`<div class="pl-h">Planos de este equipo</div><div class="thumbs">${pl}</div>`:""}`;
+  info.innerHTML=`<button class="x" aria-label="Cerrar" type="button">×</button><h2>${e.tag}</h2><h3>${e.name}</h3><dl>${main.map(row).join("")}</dl>`+
+    (rest.length?`<dl class="rest" hidden>${rest.map(row).join("")}</dl><button type="button" class="more-b">Ver más (${rest.length} datos)</button>`:"")+
+    `<button type="button" class="go">${WALK_ICON}Ir caminando hasta aquí</button>`+
+    (pl?`<div class="pl-h">Planos de este equipo</div><div class="thumbs">${pl}</div>`:"");
   info.classList.add("show"); info.scrollTop=0; resize(); info.querySelector(".x").onclick=()=>{info.classList.remove("show"); highlight(null); resize()};
+  const mb=info.querySelector(".more-b"); if(mb) mb.onclick=()=>{const d=info.querySelector(".rest"); d.hidden=!d.hidden; d.style.marginTop="6px";
+    mb.textContent=d.hidden?`Ver más (${rest.length} datos)`:"Ver menos"};
+  info.querySelector(".go").onclick=()=>walkTo(e.tag);
   info.querySelectorAll(".thumb").forEach(b=>b.onclick=()=>openPlano(b.dataset.p))}
 function openPlano(id){const v=$("viewer"); v.querySelector("img").src=PL[id].src; v.querySelector(".vt").textContent=PL[id].t; v.classList.remove("zoom"); v.hidden=false}
 $("viewer").addEventListener("click",ev=>{const v=$("viewer"); if(ev.target.closest(".vx")){v.hidden=true;return} if(ev.target.tagName==="IMG") v.classList.toggle("zoom")});
-let downPos=null;
-canvas.addEventListener("pointerdown",ev=>{downPos=[ev.clientX,ev.clientY]; stopAuto()});
-canvas.addEventListener("pointerup",ev=>{
+let downPos=null, look=null;
+canvas.addEventListener("pointerdown",ev=>{downPos=[ev.clientX,ev.clientY]; stopAuto();
+  if(walk){look={id:ev.pointerId,x:ev.clientX,y:ev.clientY}; canvas.setPointerCapture(ev.pointerId)}});
+canvas.addEventListener("pointermove",ev=>{if(!walk||!look||ev.pointerId!==look.id) return; const k=ev.pointerType==="touch"?.0075:.005;
+  walk.yaw-=(ev.clientX-look.x)*k; walk.pitch=THREE.MathUtils.clamp(walk.pitch+(ev.clientY-look.y)*k,walk.mode===1?-1:-.12,walk.mode===1?1:1.2);
+  look.x=ev.clientX; look.y=ev.clientY});
+canvas.addEventListener("pointercancel",()=>look=null);
+canvas.addEventListener("wheel",ev=>{if(walk&&walk.mode===3) walk.dist=THREE.MathUtils.clamp(walk.dist*(ev.deltaY>0?1.12:.89),2.2,12)},{passive:true});
+canvas.addEventListener("pointerup",ev=>{look=null;
   if(!downPos||Math.hypot(ev.clientX-downPos[0],ev.clientY-downPos[1])>6) return;
   const r=canvas.getBoundingClientRect(); mouse.set((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1);
   ray.setFromCamera(mouse,camera); const hit=ray.intersectObjects([...pickables,...(lblOn?labels:[])],false)[0];
@@ -2217,17 +2266,18 @@ canvas.addEventListener("pointerup",ev=>{
 
 let anim=null;
 const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
-function flyTo(tgt,dist,dx,dy,dz,ms=1600){const t=new V3(...tgt), d=new V3(dx??1,dy??.8,dz??1.3).normalize().multiplyScalar(dist);
+function flyTo(tgt,dist,dx,dy,dz,ms=1600){exitWalk(); const t=new V3(...tgt), d=new V3(dx??1,dy??.8,dz??1.3).normalize().multiplyScalar(dist);
   anim={t0:performance.now(),ms,p0:camera.position.clone(),q0:controls.target.clone(),p1:t.clone().add(d),q1:t}}
 function boxSize(tag){return new THREE.Box3().setFromObject(groups[tag]).getSize(new V3()).length()}
 function flyEq(tag,dist){const e=P.equipment.find(x=>x.tag===tag); if(!e) return; const n=e.focus[2]<-3;
   flyTo(e.focus,(dist||Math.max(8,boxSize(tag)*1.25))*(narrow()?1.45:1),n?.75:1,.75,n?-1.15:1.3)}
-$("bHome").onclick=()=>{stopAuto(); anim={t0:performance.now(),ms:1600,p0:camera.position.clone(),q0:controls.target.clone(),p1:HOME.pos.clone(),q1:HOME.tgt.clone()}};
+$("bHome").onclick=()=>{stopAuto(); exitWalk(); anim={t0:performance.now(),ms:1600,p0:camera.position.clone(),q0:controls.target.clone(),p1:HOME.pos.clone(),q1:HOME.tgt.clone()}};
 let flowOn=true;
 $("bFlow").onclick=e=>{flowOn=!flowOn; e.currentTarget.classList.toggle("on",flowOn); Object.values(streamGroups).forEach(g=>g.children.forEach(m=>{if(m.userData.flow) m.visible=flowOn}))};
 $("bLbl").onclick=e=>{lblOn=!lblOn; labels.forEach(l=>l.visible=lblOn); e.currentTarget.classList.toggle("on",lblOn)};
 let realColors=false;
-$("bCol").onclick=e=>{realColors=!realColors; e.currentTarget.textContent=realColors?"Colores reales":"Colores de proceso";
+$("bCol").onclick=e=>{realColors=!realColors; e.currentTarget.querySelector("span").textContent=realColors?"Colores reales":"Colores de proceso";
+  e.currentTarget.classList.toggle("on",realColors);
   Object.entries(pipeMats).forEach(([k,m])=>m.color.set(realColors?REAL:P.streams[k].color))};
 
 // ---- recorrido ----
@@ -2237,44 +2287,185 @@ function renderStep(){const s=TOUR[step];
     <div class="step-nav"><button type="button" id="sPrev">Anterior</button><button type="button" class="prim" id="sNext">${step<TOUR.length-1?"Siguiente":"Volver al inicio"}</button></div>
     <button type="button" class="play${auto?" on":""}" id="sAuto">${auto?"⏸ Pausar recorrido":"▶ Recorrido automático"}</button>
     <div class="dots">${TOUR.map((_,i)=>`<span class="${i===step?"on":""}" data-i="${i}"></span>`).join("")}</div>`;
-  $("sPrev").onclick=()=>{stopAuto(); step=Math.max(0,step-1); renderStep(); goStep()};
-  $("sNext").onclick=()=>{stopAuto(); step=step<TOUR.length-1?step+1:0; renderStep(); goStep()};
+  $("mOpen").querySelector("b").textContent=`${step+1}/${TOUR.length}`; $("mOpen").querySelector("span").textContent=s.t;
+  $("sPrev").onclick=()=>goto(step-1);
+  $("sNext").onclick=()=>goto(step<TOUR.length-1?step+1:0);
   $("sAuto").onclick=()=>auto?stopAuto():startAuto();
-  $("p-tour").querySelectorAll(".dots span").forEach(d=>d.onclick=()=>{stopAuto(); step=+d.dataset.i; renderStep(); goStep()})}
+  $("p-tour").querySelectorAll(".dots span").forEach(d=>d.onclick=()=>goto(+d.dataset.i))}
+function goto(i){stopAuto(); step=(i+TOUR.length)%TOUR.length; renderStep(); goStep()}
 function goStep(){const s=TOUR[step]; if(s.cam) flyTo(s.cam.t,s.cam.d*(narrow()?1.3:1),...(s.cam.dir||[])); else if(s.eq) flyEq(s.eq[0],s.dist);
   if(s.eq&&s.eq[0]){highlight(s.eq[0]); const e=P.equipment.find(x=>x.tag===s.eq[0]); if(e&&!narrow()) showInfo(e)} else {highlight(null); $("info").classList.remove("show"); resize()}}
 function startAuto(){auto={t:performance.now()}; renderStep(); goStep()}
 function stopAuto(){if(!auto) return; auto=null; if($("sAuto")) {$("sAuto").textContent="▶ Recorrido automático"; $("sAuto").classList.remove("on")}}
 renderStep();
-$("p-eq").innerHTML=P.systems.map(sy=>{const items=P.equipment.filter(e=>e.system===sy.id&&e.tag!=="RACK"); if(!items.length) return "";
+$("mPrev").onclick=()=>goto(step-1); $("mNext").onclick=()=>goto(step+1);
+$("mOpen").onclick=()=>setSheet(true);
+$("p-eq").innerHTML=`<p class="step-d" style="margin-top:0">Toque un equipo para verlo. Con <b>Caminar</b> encendido, el operador va caminando hasta él.</p>`+P.systems.map(sy=>{const items=P.equipment.filter(e=>e.system===sy.id&&e.tag!=="RACK"); if(!items.length) return "";
   return `<div class="grp">${sy.name}</div>`+items.map(e=>`<button class="eqbtn" data-t="${e.tag}" type="button"><b>${e.tag}</b>${e.name}</button>`).join("")}).join("");
-$("p-eq").querySelectorAll(".eqbtn").forEach(b=>b.onclick=()=>{stopAuto(); const e=P.equipment.find(x=>x.tag===b.dataset.t); highlight(e.tag); showInfo(e); flyEq(e.tag); if(narrow()) setSheet(false)});
+$("p-eq").querySelectorAll(".eqbtn").forEach(b=>b.onclick=()=>{stopAuto(); const e=P.equipment.find(x=>x.tag===b.dataset.t);
+  if(narrow()) setSheet(false); if(walk) return walkTo(e.tag); highlight(e.tag); showInfo(e); flyEq(e.tag)});
 $("p-st").innerHTML=`<p class="step-d" style="margin-top:0">Toque una corriente para mostrarla u ocultarla.</p>`+
   Object.entries(P.streams).filter(([k])=>streamGroups[k]).map(([k,s])=>`<div class="st" data-k="${k}"><i style="background:${s.color}"></i>${s.name}</div>`).join("");
 $("p-st").querySelectorAll(".st").forEach(d=>d.onclick=()=>{const g=streamGroups[d.dataset.k]; g.visible=!g.visible; d.classList.toggle("off",!g.visible)});
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===t));
   document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("active",p.id==="p-"+t.dataset.p)); setSheet(true)});
 $("note").textContent=P.meta.nota;
-// hoja inferior en el celular: se puede recoger para ver más planta
-function setSheet(open){$("side").classList.toggle("min",!open); resize()}
+// hoja inferior en el celular: arranca recogida (solo «paso N · título» y ◀ ▶) para que se vea la planta
+let layoutUntil=0;
+function setSheet(open){$("side").classList.toggle("min",!open); if(open&&narrow()) $("info").classList.remove("show"); layoutUntil=performance.now()+320; resize()}
 $("grab").onclick=()=>setSheet($("side").classList.contains("min"));
+
+// =====================================================================
+// Operador de planta: camina en 1ª o 3ª persona, choca con equipos y va solo a un equipo (A*)
+// =====================================================================
+const GR={x0:-7,z0:-26,c:.25}; GR.nx=Math.round(88/GR.c); GR.nz=Math.round(54/GR.c);
+let grid=null, comp=null, mainComp=0;
+const cellOf=(x,z)=>{const i=Math.floor((x-GR.x0)/GR.c), j=Math.floor((z-GR.z0)/GR.c); return i<0||j<0||i>=GR.nx||j>=GR.nz?-1:j*GR.nx+i};
+const isFree=(x,z)=>{const k=cellOf(x,z); return k>=0&&!grid[k]};
+const center=k=>new V3(GR.x0+(k%GR.nx+.5)*GR.c,0,GR.z0+((k/GR.nx|0)+.5)*GR.c);
+function buildGrid(){const nx=GR.nx, R=.32; grid=new Uint8Array(nx*GR.nz);
+  const mark=(x0,z0,x1,z1)=>{const i0=Math.max(0,Math.floor((x0-GR.x0)/GR.c)), i1=Math.min(nx-1,Math.floor((x1-GR.x0)/GR.c));
+    const j0=Math.max(0,Math.floor((z0-GR.z0)/GR.c)), j1=Math.min(GR.nz-1,Math.floor((z1-GR.z0)/GR.c));
+    for(let j=j0;j<=j1;j++) for(let i=i0;i<=i1;i++) grid[j*nx+i]=1};
+  eqBoxes.forEach(b=>{if(b.min.y<1.9) mark(b.min.x-.1,b.min.z-.1,b.max.x+.1,b.max.z+.1)}); // lo que está más alto se puede pasar por debajo
+  posts.forEach(([x,z,h])=>mark(x-h-R,z-h-R,x+h+R,z+h+R));
+  mark(-7,-26,81,-26+R); mark(-7,28-R,81,28); mark(-7,-26,-7+R,28); mark(81-R,-26,81,28); // la cerca
+  // zonas conectadas: el operador siempre queda en la grande (no en un rincón encerrado)
+  comp=new Int32Array(nx*GR.nz).fill(-1); const size=[]; const Q=new Int32Array(nx*GR.nz);
+  for(let s=0;s<grid.length;s++){if(grid[s]||comp[s]>=0) continue; const id=size.length; let a=0,b=0; Q[b++]=s; comp[s]=id;
+    while(a<b){const k=Q[a++], i=k%nx; [i>0?k-1:-1,i<nx-1?k+1:-1,k-nx,k+nx].forEach(n=>{if(n>=0&&n<grid.length&&!grid[n]&&comp[n]<0){comp[n]=id; Q[b++]=n}})}
+    size.push(b)}
+  mainComp=size.indexOf(Math.max(...size))}
+function nearestCell(x,z,id){const nx=GR.nx, s=cellOf(THREE.MathUtils.clamp(x,-6.5,80.5),THREE.MathUtils.clamp(z,-25.5,27.5));
+  const seen=new Uint8Array(grid.length), Q=[s]; seen[s]=1;
+  for(let a=0;a<Q.length;a++){const k=Q[a]; if(!grid[k]&&comp[k]===id) return k; const i=k%nx;
+    [i>0?k-1:-1,i<nx-1?k+1:-1,k-nx,k+nx].forEach(n=>{if(n>=0&&n<grid.length&&!seen[n]){seen[n]=1; Q.push(n)}})}
+  return -1}
+function aStar(s,g){const nx=GR.nx, N=grid.length, G=new Float32Array(N).fill(1e9), from=new Int32Array(N).fill(-1), done=new Uint8Array(N), H=[];
+  const gi=g%nx, gj=g/nx|0, h=k=>{const dx=Math.abs(k%nx-gi), dz=Math.abs((k/nx|0)-gj); return Math.max(dx,dz)+.414*Math.min(dx,dz)};
+  const push=(f,k)=>{H.push([f,k]); let i=H.length-1; while(i){const p=(i-1)>>1; if(H[p][0]<=H[i][0]) break; [H[p],H[i]]=[H[i],H[p]]; i=p}};
+  const pop=()=>{const top=H[0], last=H.pop(); if(H.length){H[0]=last; let i=0; for(;;){const l=2*i+1, r=l+1; let m=i;
+    if(l<H.length&&H[l][0]<H[m][0]) m=l; if(r<H.length&&H[r][0]<H[m][0]) m=r; if(m===i) break; [H[m],H[i]]=[H[i],H[m]]; i=m}} return top[1]};
+  G[s]=0; push(h(s),s);
+  while(H.length){const k=pop(); if(done[k]) continue; done[k]=1; if(k===g) break; const x=k%nx, z=k/nx|0;
+    for(let dz=-1;dz<=1;dz++) for(let dx=-1;dx<=1;dx++){if(!dx&&!dz) continue; const X=x+dx, Z=z+dz; if(X<0||Z<0||X>=nx||Z>=GR.nz) continue;
+      const j=Z*nx+X; if(grid[j]||done[j]) continue; if(dx&&dz&&(grid[z*nx+X]||grid[Z*nx+x])) continue; // sin cortar esquinas
+      const c=G[k]+(dx&&dz?1.414:1); if(c<G[j]){G[j]=c; from[j]=k; push(c+h(j),j)}}}
+  if(!done[g]) return null; const out=[]; for(let k=g;k>=0;k=from[k]) out.push(center(k)); return out.reverse()}
+// línea libre con margen a cada lado: el atajo no roza esquinas aunque el operador vaya un poco corrido
+function inSight(a,b){const L=a.distanceTo(b), n=Math.ceil(L/.08), px=-(b.z-a.z)/L*.2, pz=(b.x-a.x)/L*.2;
+  for(let k=0;k<=n;k++){const t=k/n, x=a.x+(b.x-a.x)*t, z=a.z+(b.z-a.z)*t; if(!isFree(x,z)||!isFree(x+px,z+pz)||!isFree(x-px,z-pz)) return false} return true}
+function smooth(pts){const out=[pts[0]]; let i=0; while(i<pts.length-1){let j=i+1; while(j+1<pts.length&&inSight(pts[i],pts[j+1])) j++; out.push(pts[j]); i=j} return out}
+function plan(e){const s=cellOf(op.pos.x,op.pos.z), g=nearestCell(e.focus[0],e.focus[2],comp[s]); if(g<0) return null;
+  return g===s?[op.pos.clone()]:(p=>p&&smooth(p))(aStar(s,g))}
+
+const op={pos:new V3(),model:null};
+function makeOperator(){const O=new THREE.Group(), B=new THREE.Group(); O.add(B); scene.add(O);
+  const part=(x,y,z,fn)=>{const T=new THREE.Group(); fn(T); const pv=new THREE.Group(); pv.position.set(x,y,z); B.add(pv); bake(T,{},pv); return pv};
+  part(0,0,0,T=>{ // overol, chaleco naranja con reflectivos, cabeza y casco blanco
+    cyl(T,M.pants,.165,.2,0,.94,0,"y",12); cyl(T,M.pants,.175,.5,0,1.18,0,"y",12);
+    cyl(T,M.vest,.19,.42,0,1.21,0,"y",12); [1.06,1.22].forEach(y=>torus(T,M.refl,.193,.014,0,y,0,"y"));
+    [-.09,.09].forEach(x=>[-1,1].forEach(s=>box(T,M.refl,.035,.4,.02,x,1.22,s*.168)));
+    [-.2,.2].forEach(x=>sph(T,M.vest,.075,x,1.37,0,8));
+    cyl(T,M.skin,.05,.1,0,1.46,0,"y",8); sph(T,M.skin,.11,0,1.58,0,10);
+    head(T,M.hat,.135,0,1.63,0,"+y",.85,14); cyl(T,M.hat,.165,.016,0,1.63,.025,"y",14)});
+  op.legs=[-.09,.09].map(x=>part(x,.88,0,T=>{cyl(T,M.pants,.075,.8,0,-.4,0,"y",8); torus(T,M.refl,.077,.012,0,-.6,0,"y"); box(T,M.rubber,.12,.1,.25,0,-.83,.04)}));
+  op.arms=[-.235,.235].map(x=>{const a=part(x,1.38,0,T=>{cyl(T,M.pants,.055,.5,0,-.25,0,"y",8); sph(T,M.skin,.05,0,-.54,0,8)}); a.rotation.z=Math.sign(x)*.08; return a});
+  const sh=new THREE.Mesh(new THREE.CircleGeometry(.38,20),new THREE.MeshBasicMaterial({color:0,transparent:true,opacity:.28,depthWrite:false}));
+  sh.rotation.x=-PI/2; sh.position.y=.02; O.add(sh);
+  op.model=O; op.body=B}
+
+let walk=null;
+const K={}, joy={x:0,y:0,on:false};
+const wrapA=a=>Math.atan2(Math.sin(a),Math.cos(a));
+const coarse=()=>narrow()||matchMedia("(pointer:coarse)").matches;
+function enterWalk(mode=3){if(!grid) buildGrid(); if(!op.model) makeOperator(); stopAuto(); anim=null;
+  if(!walk){const t=controls.target, k=nearestCell(t.x,t.z,mainComp), v=t.clone().sub(camera.position), yaw=Math.atan2(v.x,v.z);
+    op.pos.copy(center(k)); walk={mode,yaw,bodyYaw:yaw,pitch:.3,dist:4.2,path:null,goal:null,phase:0,amp:0};
+    controls.enabled=false; op.model.visible=true}
+  walk.mode=mode; walk.pitch=mode===1?.06:.3; walkUI(); resize()}
+function exitWalk(){if(!walk) return; const w=walk; walk=null; look=null;
+  controls.target.set(op.pos.x,1.2,op.pos.z);
+  if(w.mode===1) camera.position.set(op.pos.x-Math.sin(w.yaw)*7,4.5,op.pos.z-Math.cos(w.yaw)*7);
+  controls.enabled=true; op.model.visible=true; walkUI(); resize()}
+function walkUI(){$("bWalk").classList.toggle("on",!!walk); $("walkbar").hidden=!walk; $("joy").hidden=!(walk&&coarse());
+  if(walk) $("bView").querySelector("span").textContent=walk.mode===3?"1ª persona":"3ª persona"}
+function walkTo(tag){const e=P.equipment.find(x=>x.tag===tag); if(!e) return; if(!walk) enterWalk(3);
+  const path=plan(e); if(!path) return;
+  walk.path=path; walk.goal=e; walk.stuck=0; walk.replan=0; highlight(tag); $("info").classList.remove("show"); resize()}
+function arrive(e){walk.path=null; walk.goal=null; walk.face=Math.atan2(e.focus[0]-op.pos.x,e.focus[2]-op.pos.z);
+  highlight(e.tag); showInfo(e); if(narrow()) setSheet(false)}
+$("bWalk").onclick=()=>walk?exitWalk():enterWalk(3);
+$("bView").onclick=()=>enterWalk(walk.mode===3?1:3);
+$("bFree").onclick=()=>exitWalk();
+addEventListener("keydown",ev=>{if(!walk||ev.target.closest&&ev.target.closest("input,textarea")) return; K[ev.code]=true;
+  if(/^Arrow/.test(ev.code)) ev.preventDefault(); if(ev.code==="KeyV") $("bView").click(); if(ev.code==="Escape") exitWalk()});
+addEventListener("keyup",ev=>{K[ev.code]=false});
+addEventListener("blur",()=>{for(const k in K) K[k]=false});
+{const J=$("joy"), knob=J.querySelector("i"); let id=null;
+  const set=ev=>{const r=J.getBoundingClientRect(), R=r.width/2; let x=(ev.clientX-r.left-R)/R, y=(ev.clientY-r.top-R)/R; const m=Math.hypot(x,y); if(m>1){x/=m;y/=m}
+    joy.x=x; joy.y=-y; knob.style.transform=`translate(${x*R*.62}px,${y*R*.62}px)`};
+  J.addEventListener("pointerdown",ev=>{id=ev.pointerId; J.setPointerCapture(id); joy.on=true; set(ev);
+    if(narrow()&&$("info").classList.contains("show")){$("info").classList.remove("show"); resize()}}); // al caminar, la ficha no tapa la vista
+  J.addEventListener("pointermove",ev=>{if(ev.pointerId===id) set(ev)});
+  const end=ev=>{if(ev.pointerId!==id) return; id=null; joy.on=false; joy.x=joy.y=0; knob.style.transform=""};
+  J.addEventListener("pointerup",end); J.addEventListener("pointercancel",end)}
+
+const camWant=new V3();
+function updateWalk(dt,now){const w=walk;
+  let f=(K.KeyW||K.ArrowUp?1:0)-(K.KeyS||K.ArrowDown?1:0), s=(K.KeyD?1:0)-(K.KeyA?1:0), speed=K.ShiftLeft||K.ShiftRight?3.2:1.6;
+  w.yaw+=((K.ArrowLeft?1:0)-(K.ArrowRight?1:0))*dt*1.9;
+  if(joy.on){f=joy.y; s=joy.x; speed=2.6}
+  let m=Math.hypot(f,s); if(m>1){f/=m; s/=m; m=1}
+  let mx=0, mz=0;
+  if(m>.08){w.path=null; w.goal=null; w.face=null; const sy=Math.sin(w.yaw), cy=Math.cos(w.yaw);
+    mx=(sy*f-cy*s)*speed; mz=(cy*f+sy*s)*speed}
+  else if(w.path){let wp=w.path[1]; // sigue el camino libre que encontró A*
+    while(wp&&Math.hypot(wp.x-op.pos.x,wp.z-op.pos.z)<.15){w.path.shift(); wp=w.path[1]}
+    if(!wp) arrive(w.goal);
+    else {const dx=wp.x-op.pos.x, dz=wp.z-op.pos.z, d=Math.hypot(dx,dz), v=Math.min(3.2,.6+d*3);
+      mx=dx/d*v; mz=dz/d*v; w.yaw+=wrapA(Math.atan2(dx,dz)-w.yaw)*Math.min(1,dt*(w.mode===1?4:1.6))}}
+  // choques: se mueve por eje para que se deslice a lo largo del equipo
+  const x0=op.pos.x, z0=op.pos.z, nx=x0+mx*dt, nz=z0+mz*dt;
+  if(isFree(nx,z0)) op.pos.x=nx; if(isFree(op.pos.x,nz)) op.pos.z=nz;
+  const moved=Math.hypot(op.pos.x-x0,op.pos.z-z0), v=moved/Math.max(dt,1e-3);
+  if(w.path){w.stuck=moved<.002?w.stuck+dt:0; // trabado contra algo: se recalcula el camino desde donde está
+    if(w.stuck>.4){w.stuck=0; const p=++w.replan<4&&plan(w.goal); if(p) w.path=p; else arrive(w.goal)}}
+  if(w.face!=null){w.yaw+=wrapA(w.face-w.yaw)*Math.min(1,dt*3); if(Math.abs(wrapA(w.face-w.yaw))<.01) w.face=null}
+  const bodyTo=w.mode===1?w.yaw:moved>1e-4?Math.atan2(op.pos.x-x0,op.pos.z-z0):w.face!=null?w.face:w.bodyYaw;
+  w.bodyYaw+=wrapA(bodyTo-w.bodyYaw)*Math.min(1,dt*10);
+  // paso: piernas y brazos opuestos, un poco de rebote
+  w.amp+=(Math.min(1.3,v/1.4)-w.amp)*Math.min(1,dt*8); w.phase+=dt*v*4.2;
+  const a=Math.sin(w.phase)*.55*w.amp;
+  op.legs[0].rotation.x=a; op.legs[1].rotation.x=-a; op.arms[0].rotation.x=-a*.8; op.arms[1].rotation.x=a*.8;
+  op.body.position.y=Math.abs(Math.cos(w.phase))*.035*w.amp;
+  op.model.position.copy(op.pos); op.model.rotation.y=w.bodyYaw; op.model.visible=w.mode===3;
+  const sy=Math.sin(w.yaw), cy=Math.cos(w.yaw);
+  if(w.mode===1){const cp=Math.cos(w.pitch); camera.position.set(op.pos.x+sy*.12,1.65+op.body.position.y*.5,op.pos.z+cy*.12);
+    camera.lookAt(camera.position.x+sy*cp,camera.position.y-Math.sin(w.pitch),camera.position.z+cy*cp)}
+  else {const cp=Math.cos(w.pitch); camWant.set(op.pos.x-sy*cp*w.dist,1.45+Math.sin(w.pitch)*w.dist,op.pos.z-cy*cp*w.dist); camWant.y=Math.max(.4,camWant.y);
+    camera.position.lerp(camWant,1-Math.exp(-dt*9)); camera.lookAt(op.pos.x,1.35,op.pos.z)}}
 
 // =====================================================================
 // Bucle: render continuo liviano y ajuste automático de resolución
 // =====================================================================
-function resize(){const w=innerWidth,h=innerHeight; renderer.setSize(w,h,false);
-  if(narrow()){const sh=$("side").classList.contains("min")?0:.36, fh=h*(1+sh); camera.fov=w<h?62:50; camera.aspect=w/fh; camera.setViewOffset(w,fh,0,h*sh,w,h)}
+function resize(){const w=innerWidth,h=innerHeight; renderer.setSize(w,h,false); frame()}
+function frame(){const w=innerWidth,h=innerHeight;
+  if(narrow()){// el centro de la vista queda entre la barra de arriba y la hoja de abajo
+    const top=$("top").getBoundingClientRect().bottom, bot=$("side").getBoundingClientRect().top, s=Math.round((top+bot)/2-h/2), fh=h+2*Math.abs(s);
+    camera.fov=w<h?(walk?72:62):(walk?60:50); camera.aspect=w/fh; camera.setViewOffset(w,fh,0,s<0?2*-s:0,w,h)}
   else {// el centro de la vista queda entre el panel de la izquierda y la ficha del equipo
     const right=$("info").classList.contains("show")?w-384:w, s=Math.round((352+right)/2-w/2), fw=w+2*Math.abs(s);
-    camera.fov=42; camera.aspect=fw/h; camera.setViewOffset(fw,h,s<0?2*-s:0,0,w,h)}
+    camera.fov=walk?58:42; camera.aspect=fw/h; camera.setViewOffset(fw,h,s<0?2*-s:0,0,w,h)}
   camera.updateProjectionMatrix()}
 addEventListener("resize",resize); resize();
 renderer.shadowMap.needsUpdate=true;
 let last=performance.now(), acc=0, frames=0, slow=0;
 function loop(now){const dt=Math.min(.05,(now-last)/1000); last=now;
+  if(now<layoutUntil) frame(); // mientras la hoja sube o baja
   if(anim){const k=Math.min(1,(now-anim.t0)/anim.ms), e=ease(k); camera.position.lerpVectors(anim.p0,anim.p1,e); controls.target.lerpVectors(anim.q0,anim.q1,e); if(k>=1) anim=null}
   if(auto&&!anim&&now-auto.t>(auto.wait||0)){auto.t=now; auto.wait=8500; if(auto.started){step=(step+1)%TOUR.length; renderStep(); goStep()} auto.started=true}
-  controls.update();
+  if(walk) updateWalk(dt,now); else controls.update();
   if(flowOn){flowTex.offset.x-=dt*1.1; flowFast.offset.x-=dt*1.9}
   spinners.forEach(b=>{if(b.userData.sway) b.rotation.y=.35+Math.sin(now*.0006)*.25; else b.rotateY(dt*b.userData.spin)});
   flames.forEach(F=>F.children.forEach((s,i)=>{const [w,h,o]=s.userData.b, f=1+.13*Math.sin(now*.011+i*2.1)+.07*Math.sin(now*.027+i);
@@ -2285,14 +2476,19 @@ function loop(now){const dt=Math.min(.05,(now-last)/1000); last=now;
   acc+=dt; frames++; if(acc>2){const fps=frames/acc; acc=0; frames=0;
     if(fps<40&&pixelRatio>1){slow++; if(slow>=1){pixelRatio=Math.max(1,pixelRatio-.25); renderer.setPixelRatio(pixelRatio); resize(); slow=0}} else slow=0}
   requestAnimationFrame(loop)}
-// ?cam=x,y,z,tx,ty,tz · ?equipo=TAG · ?paso=N · ?nombres=0 (para capturas y enlaces directos)
+// ?cam=x,y,z,tx,ty,tz · ?equipo=TAG · ?paso=N · ?nombres=0 · ?caminar=1|3 · ?ir=TAG (para capturas y enlaces directos)
 {const q=new URLSearchParams(location.search), c=(q.get("cam")||"").split(",").map(Number);
   if(c.length===6&&c.every(isFinite)){camera.position.set(c[0],c[1],c[2]); controls.target.set(c[3],c[4],c[5])}
   if(q.get("nombres")==="0"&&lblOn) $("bLbl").click();
   if(q.get("paso")){step=Math.min(TOUR.length-1,Math.max(0,+q.get("paso")-1)); renderStep(); goStep(); if(anim) anim.ms=1}
-  const eq=P.equipment.find(x=>x.tag===q.get("equipo")); if(eq){highlight(eq.tag); showInfo(eq)}}
+  const eq=P.equipment.find(x=>x.tag===q.get("equipo")); if(eq){highlight(eq.tag); showInfo(eq)}
+  if(q.get("caminar")) enterWalk(q.get("caminar")==="1"?1:3);
+  if(q.get("ir")) walkTo(q.get("ir"))}
 requestAnimationFrame(t=>{last=t; loop(t); $("loading").classList.add("done"); setTimeout(()=>$("loading").remove(),600)});
-window.__plant={scene,camera,controls,groups,flyEq,renderer,info:()=>renderer.info.render};
+window.__plant={scene,camera,controls,groups,flyEq,renderer,info:()=>renderer.info.render,
+  walk:()=>walk&&{mode:walk.mode,pos:op.pos.toArray(),path:walk.path&&walk.path.length,goal:walk.goal&&walk.goal.tag},
+  grid:()=>grid&&{grid,comp,mainComp,GR},enterWalk,exitWalk,walkTo,keys:K,joy,
+  sim:(n=1,dt=.05)=>{for(let i=0;i<n&&walk;i++) updateWalk(dt,0)}}; // pruebas sin pantalla
 })();
 </script>
 </body>
